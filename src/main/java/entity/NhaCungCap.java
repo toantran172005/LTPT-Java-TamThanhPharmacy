@@ -1,0 +1,28 @@
+package entity;
+
+import jakarta.persistence.*;
+import org.hibernate.annotations.Nationalized;
+
+@Entity
+@Table(name = "NhaCungCap")
+public class NhaCungCap {
+
+    @Id
+    @Column(name = "maNCC", length = 20)
+    private String maNCC;
+
+    @Nationalized
+    @Column(name = "tenNCC", length = 100, nullable = false)
+    private String tenNCC;
+
+    @Nationalized
+    @Column(name = "diaChi", length = 255, nullable = false)
+    private String diaChi;
+
+    @Column(name = "sdt", length = 20, nullable = false)
+    private String sdt;
+
+    @Column(name = "email", length = 100, nullable = false)
+    private String email;
+
+}

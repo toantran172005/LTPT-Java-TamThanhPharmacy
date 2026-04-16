@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
+             version="3.2">
+
+    <persistence-unit name="TamThanhPharmacy" transaction-type="RESOURCE_LOCAL">
+        <class>entity.DonViTinh</class>
+        <class>entity.Thue</class>
+        <class>entity.NhaCungCap</class>
+        <class>entity.KeThuoc</class>
+        <class>entity.KhuyenMai</class>
+        <class>entity.QuocGia</class>
+        <class>entity.KhachHang</class>
+        <class>entity.NhanVien</class>
+        <class>entity.TaiKhoan</class>
+        <class>entity.Thuoc</class>
+        <class>entity.ThuocDonViTinh</class>
+        <class>entity.HoaDon</class>
+        <class>entity.CTHoaDon</class>
+        <class>entity.Kho</class>
+        <class>entity.CTKho</class>
+        <class>entity.PhieuDatHang</class>
+        <class>entity.CTPhieuDatHang</class>
+        <class>entity.PhieuDatThuoc</class>
+        <class>entity.CTPhieuDatThuoc</class>
+        <class>entity.PhieuNhapThuoc</class>
+        <class>entity.CTPhieuNhapThuoc</class>
+        <class>entity.PhieuDoiTra</class>
+        <class>entity.CTPhieuDoiTra</class>
+        <class>entity.PhieuKhieuNaiHoTroKH</class>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:sqlserver://localhost:1433;databaseName=TamThanhPharmacyJPA;encrypt=true;trustServerCertificate=true"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value="sapassword"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.jdbc.batch_size" value="50"/>
+            <property name="hibernate.order_inserts" value="true"/>
+            <property name="hibernate.order_updates" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
