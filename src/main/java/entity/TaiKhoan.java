@@ -24,9 +24,8 @@ public class TaiKhoan {
     private String email;
 
     @Nationalized
-    @Enumerated(EnumType.STRING)
     @Column(name = "loaiTK", length = 20)
-    private LoaiTaiKhoan loaiTK;
+    private String loaiTK;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "maNV", nullable = false)

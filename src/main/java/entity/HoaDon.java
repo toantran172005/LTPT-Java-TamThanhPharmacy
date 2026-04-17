@@ -20,6 +20,18 @@ public class HoaDon {
     private LocalDate ngayLap;
 
     @Nationalized
+    @Column(name = "tenHT", length = 100)
+    private String tenHT;
+
+    @Nationalized
+    @Column(name = "ghiChu", length = 255)
+    private String ghiChu;
+
+    @Nationalized
+    @Column(name = "hotline", length = 20)
+    private String hotline;
+
+    @Nationalized
     @Column(name = "diaChiHT", length = 255)
     private String diaChiHT;
 
