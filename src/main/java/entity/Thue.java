@@ -1,7 +1,13 @@
 package entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.Nationalized;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "Thue")
@@ -24,5 +30,10 @@ public class Thue {
 
     @Column(name = "trangThai")
     private Boolean trangThai = true;
+
+    @Override
+    public String toString() {
+        return this.loaiThue + " - " + (this.tyLeThue * 100) + "%";
+    }
 
 }

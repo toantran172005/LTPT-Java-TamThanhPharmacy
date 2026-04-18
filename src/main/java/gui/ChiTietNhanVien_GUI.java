@@ -1,10 +1,8 @@
 package gui;
 
 //import controller.ChiTietHoaDonCtrl;
-//import controller.ChiTietNhanVienCtrl;
-//import controller.ToolCtrl;
-
 import com.toedter.calendar.JDateChooser;
+import controller.ChiTietNhanVienController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -19,30 +17,30 @@ public class ChiTietNhanVien_GUI extends JPanel {
 	public JTextField txtMaNV, txtTenNV, txtSdt, txtLuong, txtEmail, txtThue;
 	public JComboBox<String> cmbChucVu, cmbGioiTinh;
 	public JDateChooser dtpNgaySinh, dtpNgayVaoLam;
-//	public ChiTietNhanVienCtrl ctrl;
+	public ChiTietNhanVienController ctrl;
 
 	public ToolCtrl tool = new ToolCtrl();
 	public TrangChuQL_GUI mainFrame;
 	public TrangChuNV_GUI nvFrame;
     
-// 	public ChiTietNhanVienCtrl getCtrl() {
-// 		return ctrl;
-// 	}
-//
-// 	public void setController(ChiTietNhanVienCtrl ctrl) {
-// 	    this.ctrl = ctrl;
-// 	}
+ 	public ChiTietNhanVienController getCtrl() {
+ 		return ctrl;
+ 	}
+
+ 	public void setController(ChiTietNhanVienController ctrl) {
+ 	    this.ctrl = ctrl;
+ 	}
  	
  	public ChiTietNhanVien_GUI(TrangChuQL_GUI mainFrame) {
 		this.mainFrame = mainFrame;
 		initUI();
-//		this.ctrl = new ChiTietNhanVienCtrl(this);
+		this.ctrl = new ChiTietNhanVienController(this);
 	}
  	
  	public ChiTietNhanVien_GUI(TrangChuNV_GUI nvFrame) {
  	    this.nvFrame = nvFrame;
  	    initUI();
-// 	    this.ctrl = new ChiTietNhanVienCtrl(this);
+ 	    this.ctrl = new ChiTietNhanVienController(this);
  	}
 
     public void initUI() {

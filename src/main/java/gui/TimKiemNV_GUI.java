@@ -1,5 +1,6 @@
 package gui;
 
+import controller.TimKiemNhanVienController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -8,8 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 //import controller.TimKiemHDCtrl;
-//import controller.TimKiemNhanVienCtrl;
-//import controller.ToolCtrl;
+
 
 import java.awt.*;
 
@@ -28,7 +28,7 @@ public class TimKiemNV_GUI extends JPanel {
 	public TimKiemNV_GUI(TrangChuQL_GUI mainFrame) {
 		this.mainFrame = mainFrame;
 		initUI();
-//		new TimKiemNhanVienCtrl(this);
+		new TimKiemNhanVienController(this);
 	}
 
 	public void initUI() {

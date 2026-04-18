@@ -1,5 +1,6 @@
 package gui;
 
+import controller.TimKiemPhieuDatHangController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -27,37 +28,37 @@ public class TimKiemPhieuDatHang_GUI extends JPanel {
 	Font font1 = new Font("Time New Roman", Font.BOLD, 18);
 	Font font2 = new Font("Time New Roman", Font.PLAIN, 15);
 	public ToolCtrl tool = new ToolCtrl();
-//	public TimKiemPhieuDatHangCtrl dspdhCtrl = new TimKiemPhieuDatHangCtrl(this);
+	public TimKiemPhieuDatHangController dspdhCtrl = new TimKiemPhieuDatHangController(this);
 	public DefaultTableModel model;
 
 	public TimKiemPhieuDatHang_GUI(TrangChuNV_GUI mainFrameNV) {
 		this.mainFrameNV = mainFrameNV;
 		initUI();
-//		setHoatDong();
+		setHoatDong();
 	}
 
 	public TimKiemPhieuDatHang_GUI(TrangChuQL_GUI mainFrame) {
 		this.mainFrameQL = mainFrame;
 		initUI();
-//		setHoatDong();
+		setHoatDong();
 	}
 
-//	public void setHoatDong() {
-//		btnLamMoi.addActionListener(e -> dspdhCtrl.lamMoi());
-//		btnChiTiet.addActionListener(e -> dspdhCtrl.moTrangChiTiet());
-//		txtTenKH.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				dspdhCtrl.locTatCa();
-//			}
-//		});
-//		txtTenNV.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				dspdhCtrl.locTatCa();
-//			}
-//		});
-//	}
+	public void setHoatDong() {
+		btnLamMoi.addActionListener(e -> dspdhCtrl.lamMoi());
+		btnChiTiet.addActionListener(e -> dspdhCtrl.moTrangChiTiet());
+		txtTenKH.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				dspdhCtrl.locTatCa();
+			}
+		});
+		txtTenNV.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				dspdhCtrl.locTatCa();
+			}
+		});
+	}
 
 	public void initUI() {
 		setLayout(new BorderLayout());
@@ -151,7 +152,7 @@ public class TimKiemPhieuDatHang_GUI extends JPanel {
 
 		add(scrollPane, BorderLayout.CENTER);
 
-//		dspdhCtrl.setDataChoTable(dspdhCtrl.layTatCaPhieuDatHang());
+		dspdhCtrl.setDataChoTable(dspdhCtrl.layTatCaPhieuDatHang());
 	}
 
 	public JTable getTblPhieuDatHang() {
