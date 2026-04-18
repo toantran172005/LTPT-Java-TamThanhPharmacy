@@ -1,10 +1,15 @@
 package entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
 @Entity
 @Table(name = "KeThuoc")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class KeThuoc {
 
     @Id

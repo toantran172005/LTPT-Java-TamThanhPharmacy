@@ -5,9 +5,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-//import controller.ChiTietKeThuocCtrl;
-//import controller.ToolCtrl;
-//import dao.KeThuocDAO;
+import controller.ChiTietKeThuocController;
 import entity.KeThuoc;
 import utils.ToolCtrl;
 
@@ -22,41 +20,39 @@ public class ChiTietKeThuoc_GUI extends JPanel {
 	public JButton btnCapNhat, btnThoat;
 	public ToolCtrl tool;
 	public DefaultTableModel model;
-//	public KeThuocDAO ktDAO;
-//	public ChiTietKeThuocCtrl ctktCtrl;
+	public ChiTietKeThuocController ctktCtrl;
 	public KeThuoc ke;
 
 	public ChiTietKeThuoc_GUI(KeThuoc ke) {
 		this.ke = ke;
 		tool = new ToolCtrl();
-//		ktDAO = new KeThuocDAO();
-//		ctktCtrl = new ChiTietKeThuocCtrl(this);
+		ctktCtrl = new ChiTietKeThuocController(this);
 		khoiTaoUI();
 		ganData(ke);
 		ganAction();
 	}
 
 	public void ganAction() {
-//		btnThoat.addActionListener(e -> ctktCtrl.quayLaiDS());
-//		btnCapNhat.addActionListener(e -> ctktCtrl.xuLyCapNhat());
+		btnThoat.addActionListener(e -> ctktCtrl.quayLaiDS());
+		btnCapNhat.addActionListener(e -> ctktCtrl.xuLyCapNhat());
 	}
 
 	public void ganData(KeThuoc ke) {
-//		txtMaKe.setText(ke.getMaKe());
-//		txtSucChua.setText(String.valueOf(ke.getSucChua()));
-//		txaMoTa.setText(ke.getMoTa());
-//		khoiTaoCmb();
-//		ctktCtrl.choPhepEdit(false);
-//		ctktCtrl.setDataChoTable(ctktCtrl.listThuoc);
+		txtMaKe.setText(ke.getMaKe());
+		txtSucChua.setText(String.valueOf(ke.getSucChua()));
+		txaMoTa.setText(ke.getMoTa());
+		khoiTaoCmb();
+		ctktCtrl.choPhepEdit(false);
+		ctktCtrl.setDataChoTable(ctktCtrl.listThuoc);
 	}
 
-//	public void khoiTaoCmb() {
-//		cmbTrangThai.setSelectedItem(ke.isTrangThai() ? "Hoạt động" : "Ngừng hoạt động");
-//		for (String lk : ktDAO.layTatCaKeThuoc()) {
-//			cmbLoaiKe.addItem(lk);
-//		}
-//		cmbLoaiKe.setSelectedItem(ke.getLoaiKe());
-//	}
+	public void khoiTaoCmb() {
+		cmbTrangThai.setSelectedItem(ke.getTrangThai() ? "Hoạt động" : "Ngừng hoạt động");
+		for (String lk : ctktCtrl.layTatCaTenKe()) {
+			cmbLoaiKe.addItem(lk);
+		}
+		cmbLoaiKe.setSelectedItem(ke.getLoaiKe());
+	}
 
 	public void khoiTaoUI() {
 		setLayout(new BorderLayout());

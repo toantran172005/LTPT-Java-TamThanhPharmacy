@@ -1,14 +1,12 @@
 package gui;
 
+import controller.KeThuocController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
-//import controller.DanhSachKeThuocCtrl;
-//import controller.ToolCtrl;
 import java.awt.*;
 
 public class DanhSachKeThuoc_GUI extends JPanel {
@@ -20,34 +18,34 @@ public class DanhSachKeThuoc_GUI extends JPanel {
 
 	public ToolCtrl tool = new ToolCtrl();
 	public DefaultTableModel model;
-//	public DanhSachKeThuocCtrl ktCtrl = new DanhSachKeThuocCtrl(this);
+	public KeThuocController ktCtrl = new KeThuocController(this);
 
 	public DanhSachKeThuoc_GUI() {
 		khoiTaoUI();
-//		setUpCmb();
-//		ktCtrl.locTatCa(ktCtrl.hienThiHoatDong);
-//		setHoatDong();
+		setUpCmb();
+		ktCtrl.locTatCa(ktCtrl.hienThiHoatDong);
+		setHoatDong();
 	}
 
-//	public void setHoatDong() {
-//		btnLamMoi.addActionListener(e -> ktCtrl.lamMoi());
-//		cmbLoaiKe.addActionListener(e -> ktCtrl.locTatCa(ktCtrl.hienThiHoatDong));
-//		cmbSucChua.addActionListener(e -> ktCtrl.locTatCa(ktCtrl.hienThiHoatDong));
-//		btnLichSuXoa.addActionListener(e -> ktCtrl.xuLyBtnLichSuXoa());
-//		btnXoa.addActionListener(e -> ktCtrl.xoaKeThuoc());
-//		btnXemCT.addActionListener(e -> ktCtrl.xemChiTietKT());
-//	}
+	public void setHoatDong() {
+		btnLamMoi.addActionListener(e -> ktCtrl.lamMoi());
+		cmbLoaiKe.addActionListener(e -> ktCtrl.locTatCa(ktCtrl.hienThiHoatDong));
+		cmbSucChua.addActionListener(e -> ktCtrl.locTatCa(ktCtrl.hienThiHoatDong));
+		btnLichSuXoa.addActionListener(e -> ktCtrl.xuLyBtnLichSuXoa());
+		btnXoa.addActionListener(e -> ktCtrl.xoaKeThuoc());
+		btnXemCT.addActionListener(e -> ktCtrl.xemChiTietKT());
+	}
 
-//	public void setUpCmb() {
-//		cmbLoaiKe.removeAllItems();
-//		cmbLoaiKe.addItem("Tất cả");
-//		for (String loaiKe : ktCtrl.layListTenKe()) {
-//			cmbLoaiKe.addItem(loaiKe);
-//		}
-//		cmbLoaiKe.setEditable(false);
-//		cmbSucChua.setEditable(false);
-//
-//	}
+	public void setUpCmb() {
+		cmbLoaiKe.removeAllItems();
+		cmbLoaiKe.addItem("Tất cả");
+		for (String loaiKe : ktCtrl.layListTenKe()) {
+			cmbLoaiKe.addItem(loaiKe);
+		}
+		cmbLoaiKe.setEditable(false);
+		cmbSucChua.setEditable(false);
+
+	}
 
 	public void khoiTaoUI() {
 		setLayout(new BorderLayout());
@@ -73,6 +71,7 @@ public class DanhSachKeThuoc_GUI extends JPanel {
 		lblSucChua.setPreferredSize(new Dimension(120, 30));
 
 		cmbSucChua = tool.taoComboBox(new String[] { "Tất cả", "< 100", "< 200", "< 300", "< 400", "< 500" });
+		cmbSucChua.setEditable(false);
 		cmbSucChua.setBackground(Color.WHITE);
 
 		rowSucChua.add(Box.createHorizontalStrut(15));
@@ -91,6 +90,7 @@ public class DanhSachKeThuoc_GUI extends JPanel {
 		lblLoaiKe.setPreferredSize(new Dimension(120, 30));
 
 		cmbLoaiKe = tool.taoComboBox(new String[] { "Tất cả" });
+		cmbLoaiKe.setEditable(false);
 		cmbLoaiKe.setBackground(Color.WHITE);
 
 		rowLoaiKe.add(Box.createHorizontalStrut(15));
