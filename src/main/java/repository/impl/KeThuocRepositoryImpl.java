@@ -2,7 +2,6 @@ package repository.impl;
 
 import entity.KeThuoc;
 import entity.Thuoc;
-import lombok.NoArgsConstructor;
 import repository.GenericJpa;
 import repository.intf.KeThuocRepository;
 

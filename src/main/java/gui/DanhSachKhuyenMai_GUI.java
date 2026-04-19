@@ -7,6 +7,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
 import com.toedter.calendar.JDateChooser;
+import controller.KhuyenMaiController;
 import utils.ToolCtrl;
 //
 //import controller.KhuyenMaiCtrl;
@@ -26,10 +27,10 @@ public class DanhSachKhuyenMai_GUI extends JPanel {
     public JButton btnXemChiTiet, btnLamMoi, btnLichSuXoa, btnXoaTatCa;
 
     private final ToolCtrl tool = new ToolCtrl();
-//    private KhuyenMaiCtrl kmCtrl;
+    private KhuyenMaiController kmCtrl;
 
     public DanhSachKhuyenMai_GUI() {
-//    	kmCtrl = new KhuyenMaiCtrl(this);
+    	kmCtrl = new KhuyenMaiController(this);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
@@ -138,39 +139,39 @@ public class DanhSachKhuyenMai_GUI extends JPanel {
         add(scroll, BorderLayout.CENTER);
 
         // ======= SỰ KIỆN =======
-//        ganSuKien();
+        ganSuKien();
     }
 
     // ====== XỬ LÝ SỰ KIỆN ======
     
-//    public void ganSuKien() {
-//    	kmCtrl.setDataChoTable();
-//        btnLamMoi.addActionListener(e -> lamMoi());
-//        btnXemChiTiet.addActionListener(e -> {
-//            JPanel parent = (JPanel) this.getParent();
-//            kmCtrl.xemChiTietKM(parent);
-//        });
-//        cmbTrangThai.addActionListener(e -> kmCtrl.locKMTheoTrangThai());
-//        txtTenKM.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyReleased(KeyEvent e) {
-//                kmCtrl.timKiemNhanhTheoTen();
-//            }
-//        });
-//        kmCtrl.locKMTheoNgay();
-//        dpNgay.addPropertyChangeListener("date", e -> {
-//        	if (dpNgay.getDate() != null) {
-//                kmCtrl.locKMTheoNgay();
-//            }
-//        });
-//    }
-//
-//
-//    public void lamMoi() {
-//        txtTenKM.setText("");
-//        dpNgay.setDate(null);
-//        cmbTrangThai.setSelectedItem("Tất cả");
-//        kmCtrl.setDataChoTable();
-//    }
+    public void ganSuKien() {
+    	kmCtrl.setDataChoTable();
+        btnLamMoi.addActionListener(e -> lamMoi());
+        btnXemChiTiet.addActionListener(e -> {
+            JPanel parent = (JPanel) this.getParent();
+            kmCtrl.xemChiTietKM(parent);
+        });
+        cmbTrangThai.addActionListener(e -> kmCtrl.locKMTheoTrangThai());
+        txtTenKM.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                kmCtrl.timKiemNhanhTheoTen();
+            }
+        });
+        kmCtrl.locKMTheoNgay();
+        dpNgay.addPropertyChangeListener("date", e -> {
+        	if (dpNgay.getDate() != null) {
+                kmCtrl.locKMTheoNgay();
+            }
+        });
+    }
+
+
+    public void lamMoi() {
+        txtTenKM.setText("");
+        dpNgay.setDate(null);
+        cmbTrangThai.setSelectedItem("Tất cả");
+        kmCtrl.setDataChoTable();
+    }
 
 }

@@ -46,4 +46,18 @@ public class KeThuocService {
         }
         return keThuocRepo.capNhatKeThuoc(kt);
     }
+
+    public boolean themKeThuoc(KeThuoc kt) {
+        if (kt == null || kt.getMaKe() == null) {
+            return false;
+        }
+        return keThuocRepo.themKeThuoc(kt);
+    }
+
+    public KeThuoc timTheoTen(String tenKe) {
+        if (tenKe == null || tenKe.trim().isEmpty()) {
+            return null;
+        }
+        return keThuocRepo.timTheoTen(tenKe);
+    }
 }

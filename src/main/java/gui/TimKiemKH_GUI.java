@@ -11,9 +11,6 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-//import controller.TimKiemKhachHangCtrl;
-//import controller.ToolCtrl;
-
 public class TimKiemKH_GUI extends JPanel {
 
 	public JTextField txtTenKH;
