@@ -119,7 +119,6 @@ public class KeThuocController {
     }
 
     public ArrayList<KeThuoc> layListKeThuoc() {
-        // Ép List của JPA về dạng ArrayList để không báo lỗi GUI
         return new ArrayList<>(keService.layListKeThuoc());
     }
 
@@ -132,9 +131,7 @@ public class KeThuocController {
         int sucChuaHienTai = 0;
 
         for (KeThuoc ke : list) {
-            // Lấy danh sách thuốc thông qua Service
             List<Thuoc> listThuocTrongKe = keService.layListThuocTrongKe(ke.getMaKe());
-            // Tránh NullPointerException nếu list rỗng
             int soLuongThuoc = (listThuocTrongKe != null) ? listThuocTrongKe.size() : 0;
 
             sucChuaHienTai = ke.getSucChua() - soLuongThuoc;

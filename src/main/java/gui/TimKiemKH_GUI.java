@@ -1,5 +1,6 @@
 package gui;
 
+import controller.TimKiemKhachHangController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -11,9 +12,6 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-//import controller.TimKiemKhachHangCtrl;
-//import controller.ToolCtrl;
-
 public class TimKiemKH_GUI extends JPanel {
 
 	public JTextField txtTenKH;
@@ -22,30 +20,29 @@ public class TimKiemKH_GUI extends JPanel {
 	public JButton btnXemChiTiet;
 	public JButton btnLamMoi, btnLichSuXoa, btnXoa;
 
-//	public TimKiemKhachHangCtrl tkkhCtrl = new TimKiemKhachHangCtrl(this);
+	public TimKiemKhachHangController tkkhCtrl = new TimKiemKhachHangController(this);
 	public ToolCtrl tool = new ToolCtrl();
 	public DefaultTableModel model;
 
-//	public void setHoatDong() {
-//		btnLichSuXoa.addActionListener(e -> tkkhCtrl.xuLyBtnLichSuXoa());
-//		//btnTimKiem.addActionListener(e -> tkkhCtrl.locTatCa(tkkhCtrl.hienThiHoatDong));
-//		btnLamMoi.addActionListener(e -> tkkhCtrl.lamMoi());
-//		btnXoa.addActionListener(e -> tkkhCtrl.xoaKhachHang());
-//		btnXemChiTiet.addActionListener(e -> tkkhCtrl.xemChiTietKH());
-//		txtTenKH.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				tkkhCtrl.locTatCa(tkkhCtrl.hienThiHoatDong);
-//			}
-//		});
-//
-//		txtSdt.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				tkkhCtrl.locTatCa(tkkhCtrl.hienThiHoatDong);
-//			}
-//		});
-//	}
+	public void setHoatDong() {
+		btnLichSuXoa.addActionListener(e -> tkkhCtrl.xuLyBtnLichSuXoa());
+		btnLamMoi.addActionListener(e -> tkkhCtrl.lamMoi());
+		btnXoa.addActionListener(e -> tkkhCtrl.xoaKhachHang());
+		btnXemChiTiet.addActionListener(e -> tkkhCtrl.xemChiTietKH());
+		txtTenKH.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				tkkhCtrl.locTatCa(tkkhCtrl.hienThiHoatDong);
+			}
+		});
+
+		txtSdt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				tkkhCtrl.locTatCa(tkkhCtrl.hienThiHoatDong);
+			}
+		});
+	}
 
 	public TimKiemKH_GUI() {
 		setLayout(new BorderLayout());
@@ -79,10 +76,8 @@ public class TimKiemKH_GUI extends JPanel {
 		JPanel btnRow1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 0));
 		btnRow1.setBackground(Color.WHITE);
 
-		//btnTimKiem = tool.taoButton("Tìm kiếm", "/picture/khachHang/search.png");
 		btnXemChiTiet = tool.taoButton("Xem chi tiết", "/picture/khachHang/find.png");
 
-		//btnRow1.add(btnTimKiem);
 		btnRow1.add(btnXemChiTiet);
 
 		JPanel btnRow2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
@@ -144,8 +139,8 @@ public class TimKiemKH_GUI extends JPanel {
 		scrollTable.setBackground(Color.WHITE);
 
 		add(scrollTable, BorderLayout.CENTER);
-//		tkkhCtrl.locTatCa(true);
-//		setHoatDong();
+		tkkhCtrl.locTatCa(true);
+		setHoatDong();
 	}
 
 	public JPanel taoDong(String text, JComponent comp, int labelWidth, int fieldWidth) {

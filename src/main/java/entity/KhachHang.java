@@ -13,7 +13,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "KhachHang")
 public class KhachHang {
@@ -36,5 +35,9 @@ public class KhachHang {
 
     @OneToMany(mappedBy = "khachHang", cascade = CascadeType.ALL)
     private List<HoaDon> danhSachHoaDon;
+
+    public KhachHang(String maKH, String tenKH, String sdt, int tuoi, boolean b) {
+    }
+
 
 }

@@ -1,13 +1,12 @@
 package gui;
 
+import controller.ThemKeThuocController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-//import controller.ThemKeThuocCtrl;
-//import controller.ToolCtrl;
 
 public class ThemKeThuoc_GUI extends JPanel {
 
@@ -15,19 +14,19 @@ public class ThemKeThuoc_GUI extends JPanel {
 	public JTextField txtSucChua, txtMoTa;
 	public JButton btnLamMoi, btnThem;
 	public ToolCtrl tool = new ToolCtrl();
-//	public ThemKeThuocCtrl tktCtrl = new ThemKeThuocCtrl(this);
+	public ThemKeThuocController tktCtrl = new ThemKeThuocController(this);
 
 	public ThemKeThuoc_GUI() {
 		initUI();
-//		ganHoatDong();
+		ganHoatDong();
 	}
 
-//	public void ganHoatDong() {
-//		txtSucChua.addActionListener(event -> tktCtrl.kiemTraSucChua());
-//		txtMoTa.addActionListener(event -> tktCtrl.kiemTraTatCa());
-//		btnLamMoi.addActionListener(event -> tktCtrl.lamMoi());
-//		btnThem.addActionListener(event -> tktCtrl.kiemTraTatCa());
-//	}
+	public void ganHoatDong() {
+		txtSucChua.addActionListener(event -> tktCtrl.kiemTraSucChua());
+		txtMoTa.addActionListener(event -> tktCtrl.kiemTraTatCa());
+		btnLamMoi.addActionListener(event -> tktCtrl.lamMoi());
+		btnThem.addActionListener(event -> tktCtrl.kiemTraTatCa());
+	}
 
 	public void initUI() {
 		setLayout(new BorderLayout());
