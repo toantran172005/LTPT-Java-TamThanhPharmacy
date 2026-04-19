@@ -29,9 +29,10 @@ public class PhieuKhieuNaiHoTroKH {
     private String noiDung;
 
     @Nationalized
-    @Column(name = "loaiDon", length = 50, nullable = false)
+    @Column(name = "loaiDon", nullable = false)
     private String loaiDon;
 
+    @Nationalized
     @Column(name = "trangThai", length = 50, nullable = false)
     private String trangThai;
 

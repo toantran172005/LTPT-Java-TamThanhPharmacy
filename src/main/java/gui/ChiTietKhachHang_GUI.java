@@ -2,8 +2,7 @@ package gui;
 
 import javax.swing.*;
 
-//import controller.ChiTietKhachHangCtrl;
-//import controller.ToolCtrl;
+import controller.ChiTietKhachHangController;
 import entity.KhachHang;
 import utils.ToolCtrl;
 
@@ -21,7 +20,7 @@ public class ChiTietKhachHang_GUI extends JPanel {
 	public KhachHang kh;
 
 	public ToolCtrl tool = new ToolCtrl();
-//	public ChiTietKhachHangCtrl ctkhCtrl = new ChiTietKhachHangCtrl(this);
+	public ChiTietKhachHangController ctkhCtrl = new ChiTietKhachHangController(this);
 
 	public ChiTietKhachHang_GUI(KhachHang kh) {
 		this.kh = kh;
@@ -31,17 +30,17 @@ public class ChiTietKhachHang_GUI extends JPanel {
 	}
 	
 	public void setHoatDong() {
-//		ctkhCtrl.choPhepEdit(false);
-//		btnQuayLai.addActionListener(e -> ctkhCtrl.quayLaiTKKH());
-//		btnCapNhat.addActionListener(e -> ctkhCtrl.capNhatThongTin());
+		ctkhCtrl.choPhepEdit(false);
+		btnQuayLai.addActionListener(e -> ctkhCtrl.quayLaiTKKH());
+		btnCapNhat.addActionListener(e -> ctkhCtrl.capNhatThongTin());
 	}
 
 	public void ganData(KhachHang kh) {
-//		txtMaKH.setText(kh.getMaKH());
-//		txtTenKH.setText(kh.getTenKH());
-//		txtSdt.setText(tool.chuyenSoDienThoai(kh.getSdt()));
-//		txtTuoi.setText(String.valueOf(kh.getTuoi()));
-//		cmbTrangThai.setSelectedItem((kh.isTrangThai() == true) ? "Hoạt động" : "Đã xóa");
+		txtMaKH.setText(kh.getMaKH());
+		txtTenKH.setText(kh.getTenKH());
+		txtSdt.setText(tool.chuyenSoDienThoai(kh.getSdt()));
+		txtTuoi.setText(String.valueOf(kh.getTuoi()));
+		cmbTrangThai.setSelectedItem((kh.getTrangThai()) ? "Hoạt động" : "Đã xóa");
 	}
 
 	public void khoiTaoUI() {

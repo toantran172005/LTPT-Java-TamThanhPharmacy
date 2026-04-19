@@ -29,7 +29,7 @@ public class ChiTietPhieuKNHTController {
                 PhieuKhieuNaiHoTroKH knht = kiemTraThongTin();
                 if (knht == null) return;
 
-                if (service.update(knht)) {
+                if (service.capNhatPhieu(knht)) {
                     tool.hienThiThongBao("Cập nhập", "Cập nhật phiếu " + knht.getLoaiDon() + " thành công!", true);
                     ctknhtGUI.btnCapNhat.setText("Cập nhật");
                     choPhepEdit(false);
@@ -49,18 +49,6 @@ public class ChiTietPhieuKNHTController {
             String noiDung = ctknhtGUI.txaNoiDung.getText().trim();
             String loaiDon = ctknhtGUI.cmbLoaiDon.getSelectedItem().toString();
             String trangThai = ctknhtGUI.cmbTrangThai.getSelectedItem().toString();
-
-            // Giữ lại mã cũ của các đối tượng liên quan để JPA có thể merge chính xác
-//            KhachHang kh = new KhachHang(ctknhtGUI.phieu.getKhachHang().getMaKH(),tenKH, sdt);
-//            NhanVien nv = new NhanVien(ctknhtGUI.phieu.getNhanVien().getMaNV(), tenNV);
-//
-//            return new PhieuKhieuNaiHoTroKH(
-//                    ctknhtGUI.phieu.getMaPhieu(),
-//                    nv, kh,
-//                    ctknhtGUI.phieu.getNgayLap(),
-//                    noiDung, loaiDon, trangThai
-//            );
-
 
             KhachHang kh = ctknhtGUI.phieu.getKhachHang();
             kh.setTenKH(tenKH);

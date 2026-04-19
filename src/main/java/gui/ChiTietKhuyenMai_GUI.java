@@ -7,10 +7,8 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
 import com.toedter.calendar.JDateChooser;
+import controller.KhuyenMaiController;
 import utils.ToolCtrl;
-//
-//import controller.KhuyenMaiCtrl;
-//import controller.ToolCtrl;
 import java.awt.*;
 
 public class ChiTietKhuyenMai_GUI extends JPanel {
@@ -20,7 +18,7 @@ public class ChiTietKhuyenMai_GUI extends JPanel {
     public JTable tblChiTietKM;
     public JButton btnThemThuoc, btnCapNhat, btnQuayLai;
     public JDateChooser dpNgayBD, dpNgayKT; 
-//    public KhuyenMaiCtrl kmCtrl;
+    public KhuyenMaiController kmCtrl;
     private final ToolCtrl tool = new ToolCtrl();
     public JTextField txtSoLuongMua;
     public JButton btnTru2;
@@ -37,7 +35,7 @@ public class ChiTietKhuyenMai_GUI extends JPanel {
 
 
     public ChiTietKhuyenMai_GUI() {
-//    	kmCtrl = new KhuyenMaiCtrl(this);
+    	kmCtrl = new KhuyenMaiController(this);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
@@ -184,39 +182,39 @@ public class ChiTietKhuyenMai_GUI extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
 
         // ====== SỰ KIỆN ======
-//        ganSuKien();
+        ganSuKien();
     }
     
     //========== XỬ LÝ SỰ KIỆN ==============
     
-//    public void ganSuKien() {
-//    	kmCtrl.thietLapTrangThaiSua(false);
-//
-//    	btnCapNhat.addActionListener(e -> {
-//            if (btnCapNhat.getText().equalsIgnoreCase("Cập nhật")) {
-//                kmCtrl.thietLapTrangThaiSua(true);
-//            } else {
-//                kmCtrl.luuCapNhat();
-//            }
-//        });
-//
-//    	btnQuayLai.addActionListener(e -> {
-//    	    JPanel parent = (JPanel) this.getParent();
-//    	    tool.doiPanel(parent, new DanhSachKhuyenMai_GUI());
-//    	});
-//    	cmbLoaiKM.addActionListener(e -> chonPhuongThucKM());
-//        btnCong.addActionListener(e -> tangGiaTri(txtMucKM));
-//        btnTru.addActionListener(e -> giamGiaTri(txtMucKM));
-//        btnCong1.addActionListener(e -> tangGiaTri(txtSoLuongTang));
-//        btnTru1.addActionListener(e -> giamGiaTri(txtSoLuongTang));
-//        btnCong2.addActionListener(e -> tangGiaTri(txtSoLuongMua));
-//        btnTru2.addActionListener(e -> giamGiaTri(txtSoLuongMua));
-//        cmbLoaiKM.addActionListener(e -> chonPhuongThucKM());
-//        chonPhuongThucKM();
-//        kmCtrl.setDuLieuChoCmbThuoc(cmbThemThuoc);
-//        btnThemThuoc.addActionListener(e -> kmCtrl.themThuocVaoBang());
-//        btnXoaThuoc.addActionListener(e -> kmCtrl.xoaThuocTuBang(tblChiTietKM));
-//    }
+    public void ganSuKien() {
+    	kmCtrl.thietLapTrangThaiSua(false);
+
+    	btnCapNhat.addActionListener(e -> {
+            if (btnCapNhat.getText().equalsIgnoreCase("Cập nhật")) {
+                kmCtrl.thietLapTrangThaiSua(true);
+            } else {
+                kmCtrl.luuCapNhat();
+            }
+        });
+
+    	btnQuayLai.addActionListener(e -> {
+    	    JPanel parent = (JPanel) this.getParent();
+    	    tool.doiPanel(parent, new DanhSachKhuyenMai_GUI());
+    	});
+    	cmbLoaiKM.addActionListener(e -> chonPhuongThucKM());
+        btnCong.addActionListener(e -> tangGiaTri(txtMucKM));
+        btnTru.addActionListener(e -> giamGiaTri(txtMucKM));
+        btnCong1.addActionListener(e -> tangGiaTri(txtSoLuongTang));
+        btnTru1.addActionListener(e -> giamGiaTri(txtSoLuongTang));
+        btnCong2.addActionListener(e -> tangGiaTri(txtSoLuongMua));
+        btnTru2.addActionListener(e -> giamGiaTri(txtSoLuongMua));
+        cmbLoaiKM.addActionListener(e -> chonPhuongThucKM());
+        chonPhuongThucKM();
+        kmCtrl.setDuLieuChoCmbThuoc(cmbThemThuoc);
+        btnThemThuoc.addActionListener(e -> kmCtrl.themThuocVaoBang());
+        btnXoaThuoc.addActionListener(e -> kmCtrl.xoaThuocTuBang(tblChiTietKM));
+    }
     
     public void tangGiaTri(JTextField txt) {
         try {

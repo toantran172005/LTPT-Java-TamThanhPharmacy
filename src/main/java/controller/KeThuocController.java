@@ -13,7 +13,7 @@ import utils.ToolCtrl;
 public class KeThuocController {
 
     public DanhSachKeThuoc_GUI ktGUI;
-    private KeThuocService keService = new KeThuocService();
+    private final KeThuocService keService = new KeThuocService();
     public ToolCtrl tool = new ToolCtrl();
 
     public ArrayList<KeThuoc> listKe;

@@ -1,12 +1,10 @@
 package gui;
 
+import controller.ThemKhachHangController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
 import java.awt.*;
-
-//import controller.ThemKhachHangCtrl;
-//import controller.ToolCtrl;
 
 public class ThemKhachHang_GUI extends JPanel {
 
@@ -16,20 +14,20 @@ public class ThemKhachHang_GUI extends JPanel {
     public JTextField txtTuoi;
     public JButton btnLamMoi;
     public JButton btnThem;
-//    public ThemKhachHangCtrl tkhCtrl;
+    public ThemKhachHangController tkhCtrl;
 
 
     public ThemKhachHang_GUI() {
-//    	tkhCtrl = new ThemKhachHangCtrl(this);
+    	tkhCtrl = new ThemKhachHangController(this);
     	tool = new ToolCtrl();
         khoiTaoUI();
-//        setHoatDong();
+        setHoatDong();
     }
     
-//    public void setHoatDong() {
-//    	btnLamMoi.addActionListener(e -> tkhCtrl.lamMoi());
-//    	btnThem.addActionListener(e -> tkhCtrl.ktTatCaTruocKhiThem());
-//    }
+    public void setHoatDong() {
+    	btnLamMoi.addActionListener(e -> tkhCtrl.lamMoi());
+    	btnThem.addActionListener(e -> tkhCtrl.ktTatCaTruocKhiThem());
+    }
     
     public void khoiTaoUI() {
     	setLayout(new BorderLayout());
@@ -80,7 +78,6 @@ public class ThemKhachHang_GUI extends JPanel {
         add(bottom, BorderLayout.SOUTH);
     }
 
-    // === Tạo 1 hàng label + field ===
     public JPanel taoDong(String text, JComponent comp, int labelWidth, int fieldWidth) {
         JPanel row = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
         row.setBackground(Color.WHITE);
