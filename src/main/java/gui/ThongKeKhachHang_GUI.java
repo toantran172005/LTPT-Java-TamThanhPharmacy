@@ -7,17 +7,22 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 //import controller.ThongKeKhachHangCtrl;
-//import controller.TimKiemKhachHangCtrl;
+import controller.TimKiemKhachHangController;
 //import controller.ToolCtrl;
 
 import java.awt.*;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import com.toedter.calendar.JDateChooser;
+import controller.ThongKeKhachHangController;
 //import org.jfree.chart.ChartFactory;
 //import org.jfree.chart.ChartPanel;
 //import org.jfree.chart.JFreeChart;
-//import org.jfree.data.category.DefaultCategoryDataset;
-
-import com.toedter.calendar.JDateChooser;
+import org.jfree.data.category.DefaultCategoryDataset;
 import utils.ToolCtrl;
 
 public class ThongKeKhachHang_GUI extends JPanel {
@@ -25,25 +30,25 @@ public class ThongKeKhachHang_GUI extends JPanel {
 	public JDateChooser ngayBD, ngayKT;
 	public JButton btnThongKe;
 	public JLabel lblTongKH, lblTongSLM, lblTongCT, lblChiTieuTB;
-//	public JFreeChart barChart;
-//	public ChartPanel chartPanel;
+	public JFreeChart barChart;
+	public ChartPanel chartPanel;
 	public JTable tblThongKeKH;
 	public JComboBox<String> cmbTop;
 	public JButton btnXuatExcel, btnLamMoi;
 	public ToolCtrl tool = new ToolCtrl();
-//	public ThongKeKhachHangCtrl thongKekhCtrl = new ThongKeKhachHangCtrl(this);
+	public ThongKeKhachHangController thongKekhCtrl = new ThongKeKhachHangController(this);
 	public DefaultTableModel model;
 
-//	public void setHoatDong() {
-//		btnThongKe.addActionListener(e -> thongKekhCtrl.thongKeKhachHang());
-//		cmbTop.addActionListener(e -> {
-//			String selected = (String) cmbTop.getSelectedItem();
-//			int topN = Integer.parseInt(selected);
-//			thongKekhCtrl.thongKeTopKhach(topN);
-//		});
-//		btnLamMoi.addActionListener(e -> thongKekhCtrl.lamMoi());
-//		btnXuatExcel.addActionListener(e -> thongKekhCtrl.xuatFileExcel());
-//	}
+	public void setHoatDong() {
+		btnThongKe.addActionListener(e -> thongKekhCtrl.thongKeKhachHang());
+		cmbTop.addActionListener(e -> {
+			String selected = (String) cmbTop.getSelectedItem();
+			int topN = Integer.parseInt(selected);
+			thongKekhCtrl.thongKeTopKhach(topN);
+		});
+		btnLamMoi.addActionListener(e -> thongKekhCtrl.lamMoi());
+		btnXuatExcel.addActionListener(e -> thongKekhCtrl.xuatFileExcel());
+	}
 
 	public ThongKeKhachHang_GUI() {
 		setLayout(new BorderLayout());
@@ -121,11 +126,11 @@ public class ThongKeKhachHang_GUI extends JPanel {
 
 		JPanel chartContainer = new JPanel(new BorderLayout());
 		chartContainer.setBackground(Color.WHITE);
-//		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//		barChart = ChartFactory.createBarChart("Top Khách Hàng", "Tên khách hàng", "Tổng chi tiêu (VND)", dataset);
-//		chartPanel = new ChartPanel(barChart);
-//		chartPanel.setPreferredSize(new Dimension(1000, 300));
-//		chartContainer.add(chartPanel, BorderLayout.CENTER);
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		barChart = ChartFactory.createBarChart("Top Khách Hàng", "Tên khách hàng", "Tổng chi tiêu (VND)", dataset);
+		chartPanel = new ChartPanel(barChart);
+		chartPanel.setPreferredSize(new Dimension(1000, 300));
+		chartContainer.add(chartPanel, BorderLayout.CENTER);
 		centerPanel.add(chartContainer);
 
 		centerPanel.add(Box.createVerticalStrut(10));
@@ -196,7 +201,7 @@ public class ThongKeKhachHang_GUI extends JPanel {
 		bottomPanel.add(btnLamMoi);
 
 		add(bottomPanel, BorderLayout.SOUTH);
-//		setHoatDong();
+		setHoatDong();
 	}
 
 	public JPanel createInfoBox(String title, JLabel value) {

@@ -1,5 +1,7 @@
 package gui;
 
+import controller.ChiTietPhieuKNHTController;
+import entity.PhieuKhieuNaiHoTroKH;
 import utils.ToolCtrl;
 
 import java.awt.*;
@@ -16,32 +18,32 @@ public class ChiTietPhieuKNHT_GUI extends JPanel {
 	public JComboBox<String> cmbLoaiDon, cmbTrangThai;
 	public JTextArea txaNoiDung;
 	public JButton btnCapNhat, btnQuayLai;
-//	public PhieuKhieuNaiHoTro phieu;
-//	public ChiTietPhieuKNHTCtrl ctknhtCtrl;
+	public PhieuKhieuNaiHoTroKH phieu;
+	public ChiTietPhieuKNHTController ctknhtCtrl;
 
-//	public ChiTietPhieuKNHT_GUI(PhieuKhieuNaiHoTro phieu) {
-//		this.phieu = phieu;
-//		ctknhtCtrl = new ChiTietPhieuKNHTCtrl(this);
-//		tool = new ToolCtrl();
-//		khoiTaoUI();
-//		ganData();
-//		ganSuKien();
-//	}
+	public ChiTietPhieuKNHT_GUI(PhieuKhieuNaiHoTroKH phieu) {
+		this.phieu = phieu;
+		ctknhtCtrl = new ChiTietPhieuKNHTController(this);
+		tool = new ToolCtrl();
+		khoiTaoUI();
+		ganData();
+		ganSuKien();
+	}
 
-//	public void ganSuKien() {
-//		ctknhtCtrl.choPhepEdit(false);
-//		btnQuayLai.addActionListener(e -> ctknhtCtrl.quayLaiDanhSachKNHT());
-//		btnCapNhat.addActionListener(e -> ctknhtCtrl.capNhatPhieuKNHT());
-//	}
-//
-//	public void ganData() {
-//		txtTenKH.setText(phieu.getKhachHang().getTenKH());
-//		txtTenNV.setText(phieu.getNhanVien().getTenNV());
-//		txtSdt.setText(tool.chuyenSoDienThoai(phieu.getKhachHang().getSdt()));
-//		txaNoiDung.setText(phieu.getNoiDung());
-//		cmbLoaiDon.setSelectedItem(phieu.getLoaiDon());
-//		cmbTrangThai.setSelectedItem(phieu.getTrangThai());
-//	}
+	public void ganSuKien() {
+		ctknhtCtrl.choPhepEdit(false);
+		btnQuayLai.addActionListener(e -> ctknhtCtrl.quayLaiDanhSachKNHT());
+		btnCapNhat.addActionListener(e -> ctknhtCtrl.capNhatPhieuKNHT());
+	}
+
+	public void ganData() {
+		txtTenKH.setText(phieu.getKhachHang().getTenKH());
+		txtTenNV.setText(phieu.getNhanVien().getTenNV());
+		txtSdt.setText(tool.chuyenSoDienThoai(phieu.getKhachHang().getSdt()));
+		txaNoiDung.setText(phieu.getNoiDung());
+		cmbLoaiDon.setSelectedItem(phieu.getLoaiDon());
+		cmbTrangThai.setSelectedItem(phieu.getTrangThai());
+	}
 
 	public void khoiTaoUI() {
 		setLayout(new BorderLayout());

@@ -1,5 +1,6 @@
 package gui;
 
+import controller.DanhSachKNHTController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -22,36 +23,36 @@ public class DanhSachKhieuNaiVaHoTroHK_GUI extends JPanel {
 	public ToolCtrl tool = new ToolCtrl();
 	public DefaultTableModel model;
 
-//	public DanhSachKNHTCtrl knhtCtrl;
+	public DanhSachKNHTController knhtCtrl;
 
 	public DanhSachKhieuNaiVaHoTroHK_GUI() {
-//		knhtCtrl = new DanhSachKNHTCtrl(this);
+    	knhtCtrl = new DanhSachKNHTController(this);
 		khoiTaoUI();
-//		setHoatDong();
-//		knhtCtrl.locTatCa();
+		setHoatDong();
+		knhtCtrl.locTatCa();
 	}
 
-//	public void setHoatDong() {
-//		//btnTimKiem.addActionListener(e -> knhtCtrl.locTatCa());
-//		btnLamMoi.addActionListener(e -> knhtCtrl.lamMoi());
-//		cmbLoaiDon.addActionListener(e -> knhtCtrl.locTatCa());
-//		cmbTrangThai.addActionListener(e -> knhtCtrl.locTatCa());
-//		btnXemCT.addActionListener(e -> knhtCtrl.chuyenSangChiTiet());
-//		btnThem.addActionListener(e -> knhtCtrl.chuyenSangThem());
-//		txtTenKH.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				knhtCtrl.locTatCa();
-//			}
-//		});
-//
-//		txtTenNV.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyPressed(KeyEvent e) {
-//				knhtCtrl.locTatCa();
-//			}
-//		});
-//	}
+	public void setHoatDong() {
+//		btnTimKiem.addActionListener(e -> knhtCtrl.locTatCa());
+		btnLamMoi.addActionListener(e -> knhtCtrl.lamMoi());
+		cmbLoaiDon.addActionListener(e -> knhtCtrl.locTatCa());
+		cmbTrangThai.addActionListener(e -> knhtCtrl.locTatCa());
+		btnXemCT.addActionListener(e -> knhtCtrl.chuyenSangChiTiet());
+		btnThem.addActionListener(e -> knhtCtrl.chuyenSangThem());
+		txtTenKH.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				knhtCtrl.locTatCa();
+			}
+		});
+
+		txtTenNV.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				knhtCtrl.locTatCa();
+			}
+		});
+	}
 
 	public void khoiTaoUI() {
 		setLayout(new BorderLayout());
@@ -74,7 +75,7 @@ public class DanhSachKhieuNaiVaHoTroHK_GUI extends JPanel {
 		filtersPanel.setBackground(Color.WHITE);
 
 		JLabel lblTenKH = tool.taoLabel("Tên khách hàng:");
-		txtTenKH = tool.taoTextField("Nhập tên khách hàng...");
+		txtTenKH = tool.taoTextField("");
 		JPanel p1 = taoDong(lblTenKH, txtTenKH);
 
 		JLabel lblLoaiDon = tool.taoLabel("Loại đơn:");
@@ -84,7 +85,7 @@ public class DanhSachKhieuNaiVaHoTroHK_GUI extends JPanel {
 		JPanel p2 = taoDong(lblLoaiDon, cmbLoaiDon);
 
 		JLabel lblTenNV = tool.taoLabel("Tên nhân viên:");
-		txtTenNV = tool.taoTextField("Nhập tên nhân viên...");
+		txtTenNV = tool.taoTextField("");
 		JPanel p3 = taoDong(lblTenNV, txtTenNV);
 
 		JLabel lblTrangThai = tool.taoLabel("Trạng thái:");
@@ -105,11 +106,11 @@ public class DanhSachKhieuNaiVaHoTroHK_GUI extends JPanel {
 		btnPanel.setBackground(Color.WHITE);
 
 		btnThem = tool.taoButton("Thêm", "/picture/khachHang/plus.png");
-		//btnTimKiem = tool.taoButton("Tìm kiếm", "/picture/khachHang/search.png");
+//		btnTimKiem = tool.taoButton("Tìm kiếm", "/picture/khachHang/search.png");
 		btnXemCT = tool.taoButton("Xem chi tiết", "/picture/khachHang/find.png");
 		btnLamMoi = tool.taoButton("Làm mới", "/picture/khachHang/return.png");
 
-		//btnPanel.add(btnTimKiem);
+//		btnPanel.add(btnTimKiem);
 		btnPanel.add(btnXemCT);
 		btnPanel.add(btnThem);
 		btnPanel.add(btnLamMoi);
