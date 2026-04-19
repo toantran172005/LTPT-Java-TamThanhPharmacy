@@ -1,10 +1,18 @@
 package entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Nationalized;
 
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "KhachHang")
 public class KhachHang {
@@ -27,5 +35,9 @@ public class KhachHang {
 
     @OneToMany(mappedBy = "khachHang", cascade = CascadeType.ALL)
     private List<HoaDon> danhSachHoaDon;
+
+    public KhachHang(String maKH, String tenKH, String sdt, int tuoi, boolean b) {
+    }
+
 
 }
