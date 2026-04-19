@@ -1,8 +1,13 @@
 package entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.Nationalized;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "TaiKhoan")

@@ -56,10 +56,10 @@ public class NhanVienService {
         return nhanVienRepo.themNhanVien(nv);
     }
 
-//    public boolean themTaiKhoan(TaiKhoan tk) {
-//        if (tk == null || tk.getMaTK() == null || tk.getMaTK().trim().isEmpty()) return false;
-//        return nhanVienRepo.themTaiKhoan(tk);
-//    }
+    public boolean themTaiKhoan(TaiKhoan tk) {
+        if (tk == null || tk.getMaTK() == null || tk.getMaTK().trim().isEmpty()) return false;
+        return nhanVienRepo.themTaiKhoan(tk);
+    }
 
     public String layEmailNV(String maNV) {
         if (maNV == null || maNV.trim().isEmpty()) return "";

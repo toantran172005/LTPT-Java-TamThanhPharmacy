@@ -1,7 +1,7 @@
 package gui;
 
-//import controller.ThemNhanVienCtrl;
-//import controller.ToolCtrl;
+
+import controller.ThemNhanVienController;
 import entity.Thue;
 
 import com.toedter.calendar.JDateChooser;
@@ -19,13 +19,13 @@ public class ThemNhanVien_GUI extends JPanel {
 	public JComboBox<String> cmbChucVu, cmbGioiTinh;
 	public JComboBox<Thue> cmbThue;
 	public JDateChooser dtpNgaySinh, dtpNgayVaoLam;
-//	public ThemNhanVienCtrl ctrl;
+	public ThemNhanVienController ctrl;
 
 	public ToolCtrl tool = new ToolCtrl();
 
 	public ThemNhanVien_GUI() {
 		initUI();
-//		ctrl = new ThemNhanVienCtrl(this);
+		ctrl = new ThemNhanVienController(this);
 	}
 
 	public void initUI() {

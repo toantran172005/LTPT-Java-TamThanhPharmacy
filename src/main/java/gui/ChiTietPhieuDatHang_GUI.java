@@ -12,8 +12,10 @@ import javax.swing.table.JTableHeader;
 //import dao.KhuyenMaiDAO;
 //import dao.PhieuDatHangDAO;
 //import dao.ThuocDAO;
+import controller.ChiTietPDHController;
 import entity.KhuyenMai;
 import entity.PhieuDatHang;
+import service.PhieuDatHangService;
 import utils.ToolCtrl;
 
 import java.awt.*;
@@ -31,14 +33,16 @@ public class ChiTietPhieuDatHang_GUI extends JPanel {
 	public JButton btnTaoHD, btnCapNhat, btnQuayLai;
 	public TrangChuQL_GUI mainFrameQL;
 	public TrangChuNV_GUI mainFrameNV;
-//	public PhieuDatHangDAO pdhDAO = new PhieuDatHangDAO();
-//	public KhuyenMaiDAO kmDAO = new KhuyenMaiDAO();
-//	public DonViTinhDAO dvtDAO = new DonViTinhDAO();
+
+	// NÂNG CẤP: Dùng Service thay vì DAO
+	public PhieuDatHangService pdhService = new PhieuDatHangService();
+//	public ThuocService thService = new ThuocService();
+//	public KhuyenMaiService kmService = new KhuyenMaiService();
 	Font font1 = new Font("Time New Roman", Font.BOLD, 18);
 	Font font2 = new Font("Time New Roman", Font.PLAIN, 15);
 	public ToolCtrl tool = new ToolCtrl();
 	public PhieuDatHang pdh;
-//	public ChiTietPDHCtrl ctpdhCtrl = new ChiTietPDHCtrl(this);
+	public ChiTietPDHController ctpdhCtrl = new ChiTietPDHController(this);
 //	public ThuocDAO thDAO = new ThuocDAO();
 	public JComboBox<String> cmbPTThanhToan;
 	public JLabel lblTongTien;
@@ -61,14 +65,14 @@ public class ChiTietPhieuDatHang_GUI extends JPanel {
 		initUI();
 //		hienThiThongTin(pdh);
 		choPhepCapNhap();
-//		setHoatDong();
+		setHoatDong();
 	}
 
-//	public void setHoatDong() {
-//		btnQuayLai.addActionListener(e -> ctpdhCtrl.quayLaiTrangDanhSach());
-//		btnCapNhat.addActionListener(e -> ctpdhCtrl.capNhatPDH());
+	public void setHoatDong() {
+		btnQuayLai.addActionListener(e -> ctpdhCtrl.quayLaiTrangDanhSach());
+		btnCapNhat.addActionListener(e -> ctpdhCtrl.capNhatPDH());
 //		btnTaoHD.addActionListener(e -> ctpdhCtrl.taoHoaDon());
-//	}
+	}
 
 	public void choPhepCapNhap() {
 		if (btnCapNhat.getText().trim().equals("Cập nhật")) {

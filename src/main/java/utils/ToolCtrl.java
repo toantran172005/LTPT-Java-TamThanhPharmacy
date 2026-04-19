@@ -20,7 +20,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
@@ -38,6 +40,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
+import repository.GenericJpa;
 
 public class ToolCtrl {
 	
@@ -330,7 +333,7 @@ public class ToolCtrl {
 	// 5️⃣ Định dạng tiền tệ
 	// ==========================
 	public String dinhDangVND(double amount) {
-		Locale localeVN = new Locale("vi", "VN");
+		Locale localeVN = Locale.of("vi", "VN");
 		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(localeVN);
 		return currencyFormatter.format(amount);
 	}
@@ -367,81 +370,84 @@ public class ToolCtrl {
 	// ==========================
 	// 7️⃣ Sinh khóa chính tự động
 	// ==========================
-//	public String taoKhoaChinh(String tenBangVietTat) {
-//		Map<String, String> mapBang = new HashMap<>();
-//		mapBang.put("PNT", "PhieuNhapThuoc");
-//		mapBang.put("K", "Kho");
-//		mapBang.put("TK", "TaiKhoan");
-//		mapBang.put("PKN", "Phieu_KhieuNai_HoTroKH");
-//		mapBang.put("T", "Thue");
-//		mapBang.put("KH", "KhachHang");
-//		mapBang.put("NV", "NhanVien");
-//		mapBang.put("KT", "KeThuoc");
-//		mapBang.put("NCC", "NhaCungCap");
-//		mapBang.put("TH", "Thuoc");
-//		mapBang.put("HD", "HoaDon");
-//		mapBang.put("KM", "KhuyenMai");
-//		mapBang.put("PDT", "PhieuDoiTra");
-//		mapBang.put("PDTH", "PhieuDatThuoc");
-//		mapBang.put("DVT", "DonViTinh");
-//		mapBang.put("PDH", "PhieuDatHang");
+	public String taoKhoaChinh(String tenBangVietTat) {
+		Map<String, String> mapBang = new HashMap<>();
+		mapBang.put("PNT", "PhieuNhapThuoc");
+		mapBang.put("K", "Kho");
+		mapBang.put("TK", "TaiKhoan");
+		mapBang.put("PKN", "Phieu_KhieuNai_HoTroKH");
+		mapBang.put("T", "Thue");
+		mapBang.put("KH", "KhachHang");
+		mapBang.put("NV", "NhanVien");
+		mapBang.put("KT", "KeThuoc");
+		mapBang.put("NCC", "NhaCungCap");
+		mapBang.put("TH", "Thuoc");
+		mapBang.put("HD", "HoaDon");
+		mapBang.put("KM", "KhuyenMai");
+		mapBang.put("PDT", "PhieuDoiTra");
+		mapBang.put("PDTH", "PhieuDatThuoc");
+		mapBang.put("DVT", "DonViTinh");
+		mapBang.put("PDH", "PhieuDatHang");
+
+		if (!mapBang.containsKey(tenBangVietTat)) {
+			throw new IllegalArgumentException("Không tìm thấy bảng tương ứng với mã: " + tenBangVietTat);
+		}
+
+		String tenBang = mapBang.get(tenBangVietTat);
+		String cotKhoa;
+
+		switch (tenBangVietTat) {
+			case "TH": cotKhoa = "maThuoc"; break;
+			case "KT": cotKhoa = "maKe"; break;
+			case "K": cotKhoa = "maKho"; break;
+			case "PDT": cotKhoa = "maPhieuDT"; break;
+			case "PDTH": cotKhoa = "maPDT"; break;
+			case "PKN": cotKhoa = "maPhieu"; break;
+			case "T": cotKhoa = "maThue"; break;
+			default: cotKhoa = "ma" + tenBangVietTat; break;
+		}
+
+		String prefix = "TT" + tenBangVietTat;
+
+		// Trong JPQL, index bắt đầu từ 1. Nên muốn cắt chữ "TTNV" (4 ký tự) thì bắt đầu lấy từ vị trí số 5.
+		int cutIndex = prefix.length() + 1;
+
+		// Khởi tạo nặc danh GenericJpa để tận dụng Lambda doInTransaction
+		// (Lưu ý: Bạn hãy import đúng đường dẫn của class GenericJpa vào đầu file nhé)
+//		GenericJpa jpaHelper = new GenericJpa() {};
 //
-//		if (!mapBang.containsKey(tenBangVietTat)) {
-//			throw new IllegalArgumentException("Không tìm thấy bảng tương ứng với mã: " + tenBangVietTat);
-//		}
+//		return jpaHelper.doInTransaction(em -> {
+//			try {
+//				// Câu lệnh JPQL động: Cắt bỏ tiền tố -> Ép sang kiểu INT -> Tìm số LỚN NHẤT
+//				String jpql = "SELECT MAX(CAST(SUBSTRING(e." + cotKhoa + ", " + cutIndex + ") AS int)) FROM " + tenBang + " e";
 //
-//		String tenBang = mapBang.get(tenBangVietTat);
-//		String cotKhoa;
+//				Integer maxId = em.createQuery(jpql, Integer.class).getSingleResult();
 //
-//		switch (tenBangVietTat) {
-//		case "TH":
-//            cotKhoa = "maThuoc";
-//            break;
-//		case "KT":
-//			cotKhoa = "maKe";
-//			break;
-//		case "K":
-//			cotKhoa = "maKho";
-//			break;
-//		case "PDT":
-//			cotKhoa = "maPhieuDT";
-//			break;
-//		case "PDTH":
-//			cotKhoa = "maPDT";
-//			break;
-//		case "PKN":
-//			cotKhoa = "maPhieu";
-//			break;
-//		case "T":
-//			cotKhoa = "maThue";
-//			break;
-//		default:
-//			cotKhoa = "ma" + tenBangVietTat;
-//			break;
-//		}
+//				int nextId = (maxId != null ? maxId : 0) + 1;
+//				return prefix + nextId;
 //
-//		String prefix = "TT" + tenBangVietTat;
-//
-//		String sql = String.format(
-//				"SELECT TOP 1 %s FROM %s WHERE %s LIKE ? ORDER BY TRY_CAST(REPLACE(%s, '%s', '') AS INT) DESC", cotKhoa,
-//				tenBang, cotKhoa, cotKhoa, prefix);
-//
-//		try (Connection con = KetNoiDatabase.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-//			ps.setString(1, prefix + "%");
-//			ResultSet rs = ps.executeQuery();
-//
-//			int so = 0;
-//			if (rs.next()) {
-//				String maMax = rs.getString(1);
-//				String soStr = maMax.replace(prefix, "");
-//				so = Integer.parseInt(soStr);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				// Nếu bảng chưa có dữ liệu nào hoặc gặp lỗi, mặc định trả về mã đầu tiên (VD: TTNV1)
+//				return prefix + "1";
 //			}
-//
-//			so++;
-//			return prefix + so;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+//		});
+
+		return new GenericJpa() {
+			public String taoMaSinhTuDong() {
+				// Do đang đứng "bên trong" class con của GenericJpa, ta gọi thoải mái không lỗi
+				return doInTransaction(em -> {
+					try {
+						String jpql = "SELECT MAX(CAST(SUBSTRING(e." + cotKhoa + ", " + cutIndex + ") AS int)) FROM " + tenBang + " e";
+						Integer maxId = em.createQuery(jpql, Integer.class).getSingleResult();
+						int nextId = (maxId != null ? maxId : 0) + 1;
+						return prefix + nextId;
+					} catch (Exception e) {
+						e.printStackTrace();
+						return prefix + "1";
+					}
+				});
+			}
+		}.taoMaSinhTuDong();
+	}
 }
