@@ -12,8 +12,9 @@ public class KhachHangService {
 
     private final KhachHangRepository khachHangRepo;
 
+
+
     public KhachHangService() {
-        // Khởi tạo Repository qua Interface
         this.khachHangRepo = new KhachHangRepositoryImpl();
     }
 
@@ -40,7 +41,7 @@ public class KhachHangService {
     }
 
     // Support hàm thêm khách hàng mới với tham số String truyền từ giao diện
-    public boolean themKhachHangMoi(String maKH, String tenKH, String sdt, String tuoiStr) {
+    public boolean themKhachHang(String maKH, String tenKH, String sdt, String tuoiStr) {
         try {
             int tuoi = Integer.parseInt(tuoiStr);
             KhachHang kh = new KhachHang(maKH, tenKH, sdt, tuoi, true);

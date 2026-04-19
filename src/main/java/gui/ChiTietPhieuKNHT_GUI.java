@@ -7,10 +7,6 @@ import utils.ToolCtrl;
 import java.awt.*;
 import javax.swing.*;
 
-//import controller.ChiTietPhieuKNHTCtrl;
-//import controller.ToolCtrl;
-//import entity.PhieuKhieuNaiHoTro;
-
 public class ChiTietPhieuKNHT_GUI extends JPanel {
 
 	public ToolCtrl tool = new ToolCtrl();

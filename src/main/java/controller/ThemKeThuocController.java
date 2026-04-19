@@ -43,7 +43,7 @@ public class ThemKeThuocController {
             return;
         }
 
-//        themKeThuoc();
+        themKeThuoc();
     }
 
     public boolean kiemTraSucChua() {
@@ -71,30 +71,30 @@ public class ThemKeThuocController {
         }
     }
 
-//    public void themKeThuoc() {
-//        String loaiKe = tktGUI.txtLoaiKe.getText().trim();
-//        String sucChuaStr = tktGUI.txtSucChua.getText().trim();
-//        String moTa = tktGUI.txtMoTa.getText().trim();
-//
-//        if (tool.hienThiXacNhan("Thêm kệ thuốc", "Xác nhận thêm mới kệ thuốc: " + loaiKe + "?", null)) {
-//            String maMoi = tool.taoKhoaChinh("KT");
-//
-//            // 3. Đóng gói các tham số rời rạc thành Object Entity (KeThuoc)
-//            KeThuoc ktMoi = new KeThuoc();
-//            ktMoi.setMaKe(maMoi);
-//            ktMoi.setLoaiKe(loaiKe);
-//            ktMoi.setSucChua(Integer.parseInt(sucChuaStr));
-//            ktMoi.setMoTa(moTa);
-//            ktMoi.setTrangThai(true); // Kệ mới mặc định trạng thái hoạt động là true
-//
-//            // 4. Đẩy Entity qua Service
-//            if (ktService.themKeThuoc(ktMoi)) {
-//                tool.hienThiThongBao("Thêm kệ thuốc", "Thêm mới kệ thuốc thành công!", true);
-//                lamMoi();
-//            } else {
-//                tool.hienThiThongBao("Thêm kệ thuốc", "Thêm mới kệ thuốc thất bại do lỗi hệ thống!", false);
-//            }
-//        }
-//    }
+    public void themKeThuoc() {
+        String loaiKe = tktGUI.txtLoaiKe.getText().trim();
+        String sucChuaStr = tktGUI.txtSucChua.getText().trim();
+        String moTa = tktGUI.txtMoTa.getText().trim();
+
+        if (tool.hienThiXacNhan("Thêm kệ thuốc", "Xác nhận thêm mới kệ thuốc: " + loaiKe + "?", null)) {
+            String maMoi = tool.taoKhoaChinh("KT");
+
+            // 3. Đóng gói các tham số rời rạc thành Object Entity (KeThuoc)
+            KeThuoc ktMoi = new KeThuoc();
+            ktMoi.setMaKe(maMoi);
+            ktMoi.setLoaiKe(loaiKe);
+            ktMoi.setSucChua(Integer.parseInt(sucChuaStr));
+            ktMoi.setMoTa(moTa);
+            ktMoi.setTrangThai(true); // Kệ mới mặc định trạng thái hoạt động là true
+
+            // 4. Đẩy Entity qua Service
+            if (ktService.themKeThuoc(ktMoi)) {
+                tool.hienThiThongBao("Thêm kệ thuốc", "Thêm mới kệ thuốc thành công!", true);
+                lamMoi();
+            } else {
+                tool.hienThiThongBao("Thêm kệ thuốc", "Thêm mới kệ thuốc thất bại do lỗi hệ thống!", false);
+            }
+        }
+    }
 
 }

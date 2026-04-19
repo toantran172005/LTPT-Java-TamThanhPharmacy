@@ -3,10 +3,8 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 import com.toedter.calendar.JDateChooser;
+import controller.ThemPhieuKNHTController;
 import utils.ToolCtrl;
-
-//import controller.ThemKhieuNaiCtrl;
-//import controller.ToolCtrl;
 
 public class ThemKhieuNai_GUI extends JPanel {
 
@@ -16,22 +14,22 @@ public class ThemKhieuNai_GUI extends JPanel {
     public JTextArea txaNoiDung;
     public JButton btnQuayLai, btnLamMoi, btnThem;
     public JDateChooser dateNgayLap;
-//    public ThemKhieuNaiCtrl tknCtrl;
+    public ThemPhieuKNHTController tknCtrl;
 
 
     public ThemKhieuNai_GUI() {
     	tool = new ToolCtrl();
-//    	tknCtrl = new ThemKhieuNaiCtrl(this);
+    	tknCtrl = new ThemPhieuKNHTController(this);
     	khoiTaoUI();
-//    	ganSuKien();
+    	ganSuKien();
     }
-//
-//    public void ganSuKien() {
-//    	btnQuayLai.addActionListener(e -> tknCtrl.quayLaiDanhSach());
-//    	btnLamMoi.addActionListener(e -> tknCtrl.lamMoi());
-//    	btnThem.addActionListener(e -> tknCtrl.themPhieu());
-//    }
-//
+
+    public void ganSuKien() {
+    	btnQuayLai.addActionListener(e -> tknCtrl.quayLaiDanhSach());
+    	btnLamMoi.addActionListener(e -> tknCtrl.lamMoi());
+    	btnThem.addActionListener(e -> tknCtrl.themPhieu());
+    }
+
     public void khoiTaoUI() {
     	setLayout(new BorderLayout());
         setBackground(Color.WHITE);
