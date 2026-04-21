@@ -29,13 +29,11 @@ public class DonViTinhRepositoryImpl extends GenericJpa implements DonViTinhRepo
         });
     }
 
-    //NewInstance (21/04)
     @Override
     public DonViTinh timTheoMa(String maDVT) {
         return doInTransaction(em -> em.find(DonViTinh.class, maDVT));
     }
 
-    //NewEdit (21/04) (Edit function name)
     @Override
     public boolean themDVT(DonViTinh dvt) {
         try {
@@ -51,7 +49,6 @@ public class DonViTinhRepositoryImpl extends GenericJpa implements DonViTinhRepo
     public boolean capNhatTrangThai(String maDVT, boolean trangThai) {
         try {
             inTransaction(em -> {
-                // Xóa/Khôi phục: Find lên -> Đổi trạng thái -> Merge
                 DonViTinh dvt = em.find(DonViTinh.class, maDVT);
                 if (dvt != null) {
                     dvt.setTrangThai(trangThai);

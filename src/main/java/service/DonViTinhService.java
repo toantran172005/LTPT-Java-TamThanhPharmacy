@@ -83,19 +83,11 @@ public class DonViTinhService {
         return new ArrayList<>(list);
     }
 
-    //NewInstance (21/04)
-    // Lấy danh sách đơn vị đang hoạt động (trangThai = true)
-//    public List<DonViTinh> layListDVT() {
-//        return donViTinhRepo.layDanhSachTheoTrangThai(true);
-//    }
-
-    //NewInstance (21/04)
     // Lấy danh sách đơn vị đã xóa (trangThai = false)
     public List<DonViTinh> layDanhSachDaXoa() {
         return donViTinhRepo.layDanhSachTheoTrangThai(false);
     }
 
-    //NewInstance (21/04)
     // Xóa đơn vị tính (chuyển trạng thái sang false)
     public boolean xoaDVT(String maDVT) {
         if (maDVT == null || maDVT.trim().isEmpty()) {
@@ -104,7 +96,6 @@ public class DonViTinhService {
         return donViTinhRepo.capNhatTrangThai(maDVT.trim(), false);
     }
 
-    //NewInstance (21/04)
     // Khôi phục đơn vị tính (chuyển trạng thái sang true)
     public boolean khoiPhucDVT(String maDVT) {
         if (maDVT == null || maDVT.trim().isEmpty()) {

@@ -33,7 +33,6 @@ public class DanhSachKhieuNaiVaHoTroHK_GUI extends JPanel {
 	}
 
 	public void setHoatDong() {
-//		btnTimKiem.addActionListener(e -> knhtCtrl.locTatCa());
 		btnLamMoi.addActionListener(e -> knhtCtrl.lamMoi());
 		cmbLoaiDon.addActionListener(e -> knhtCtrl.locTatCa());
 		cmbTrangThai.addActionListener(e -> knhtCtrl.locTatCa());

@@ -261,7 +261,6 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
         });
     }
 
-    // Gộp logic xoá và khôi phục (find -> setTrangThai -> merge)
     @Override
     public boolean capNhatTrangThaiThuoc(String maThuoc, boolean trangThai) {
         try {
@@ -337,8 +336,6 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
         return doInTransaction(em -> em.createQuery("SELECT q FROM QuocGia q", QuocGia.class).getResultList());
     }
 
-
-    //NewInstance (21/04)
     @Override
     public List<Thuoc> layListThuoc(boolean isTrangThai) {
         return doInTransaction(em -> {
@@ -354,7 +351,6 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
         });
     }
 
-    //NewInstance (21/04)
     @Override
     public boolean giamSoLuongTon(String maThuoc, String maDVT, int soLuongBan) {
         try {

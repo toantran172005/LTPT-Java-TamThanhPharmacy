@@ -125,8 +125,7 @@ public class ThuocService {
         if (maThuoc == null || maThuoc.trim().isEmpty()) return 0;
         return thuocRepo.laySoLuongTon(maThuoc.trim());
     }
-
-    //NewInstance (21/04)
+  
     public boolean capNhatSoLuongTon(String maThuoc, String maDVT, int soLuong, boolean isTang) {
         if (maThuoc == null || maThuoc.trim().isEmpty() || maDVT == null || maDVT.trim().isEmpty()) {
             return false;
@@ -135,26 +134,22 @@ public class ThuocService {
         return thuocRepo.capNhatSoLuongTon(maThuoc, maDVT, soLuong, isTang);
     }
 
-    //NewInstance (21/04)
     public boolean luuData(String maPNT, String maNCC, String maNV, LocalDate ngayNhap, List<Thuoc> listThuoc) {
         if (listThuoc == null || listThuoc.isEmpty()) return false;
         return thuocRepo.luuData(maPNT, maNCC, maNV, ngayNhap, listThuoc);
     }
 
-    //NewInstance (21/04)
     public String layHoacTaoThue(Thue thue) {
         if (thue == null || thue.getLoaiThue() == null) return null;
         return thuocRepo.layHoacTaoThue(thue);
     }
 
-    //NewInstance (21/04)
     public String layHoacTaoDVT(DonViTinh dvt) {
         if (dvt == null || dvt.getTenDVT() == null || dvt.getTenDVT().trim().isEmpty()) return null;
         return thuocRepo.layHoacTaoDVT(dvt);
     }
 
     // ================== CÁC HÀM LẤY DANH SÁCH ==================
-    //NewInstance (21/04)
     public List<Thuoc> layListThuoc(boolean trangThai) {
         return thuocRepo.layListThuoc(trangThai);
     }
@@ -163,14 +158,11 @@ public class ThuocService {
         return thuocRepo.layDanhSachThuocChoKM();
     }
 
-    // ================== CÁC HÀM TÌM KIẾM / LẤY THÔNG TIN ĐƠN LẺ ==================
-    //NewInstance (21/04)
     public Thuoc layThuocDeDat(String maThuoc) {
         if (maThuoc == null || maThuoc.trim().isEmpty()) return null;
         return thuocRepo.layThuocDeDat(maThuoc);
     }
 
-    //NewInstance (21/04)
     public boolean kiemTraTrungTenVaQuocGia(String tenThuoc, String maQG) {
         if (tenThuoc == null || tenThuoc.trim().isEmpty() || maQG == null || maQG.trim().isEmpty()) {
             return false;
@@ -178,25 +170,21 @@ public class ThuocService {
         return thuocRepo.kiemTraTrungTenVaQuocGia(tenThuoc, maQG);
     }
 
-    //NewInstance (21/04)
     public String layMaQuocGiaTheoTen(String tenQG) {
         if (tenQG == null || tenQG.trim().isEmpty()) return null;
         return thuocRepo.layMaQuocGiaTheoTen(tenQG);
     }
 
-    //NewInstance (21/04)
     public String timMaQGTheoTen(String tenQG) {
         if (tenQG == null || tenQG.trim().isEmpty()) return null;
         return thuocRepo.timMaQGTheoTen(tenQG);
     }
 
-    //NewInstance (21/04)
     public QuocGia layQuocGiaTheoMa(String maQG) {
         if (maQG == null || maQG.trim().isEmpty()) return null;
         return thuocRepo.layQuocGiaTheoMa(maQG);
     }
 
-    //NewInstance (21/04)
     public Number layGiaBanTheoDVT(String maThuoc, String maDVT) {
         if (maThuoc == null || maThuoc.trim().isEmpty() || maDVT == null || maDVT.trim().isEmpty()) {
             return 0;
@@ -204,13 +192,11 @@ public class ThuocService {
         return thuocRepo.layGiaBanTheoDVT(maThuoc, maDVT);
     }
 
-    //NewInstance (21/04)
     public double layDonGiaTheoMaThuoc(String maThuoc) {
         if (maThuoc == null || maThuoc.trim().isEmpty()) return 0.0;
         return thuocRepo.layDonGiaTheoMaThuoc(maThuoc);
     }
 
-    //NewInstance (21/04)
     public boolean giamSoLuongTon(String maThuoc, String maDVT, int soLuongBan) {
         if (maThuoc == null || maThuoc.isBlank()) {
             throw new IllegalArgumentException("Mã thuốc không hợp lệ");

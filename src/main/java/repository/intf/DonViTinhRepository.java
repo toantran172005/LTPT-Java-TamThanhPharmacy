@@ -13,5 +13,4 @@ public interface DonViTinhRepository {
     //NewInstance (21/04)
     DonViTinh timTheoMa(String maDVT);
     boolean themDVT(DonViTinh dvt);
-
 }

@@ -28,5 +28,4 @@ public interface HoaDonRepository {
     double tinhTongTienTheoHoaDon(String maHD);
     List<Object[]> layChiTietHoaDon(String maHD);
     String layMaHoaDonMoiNhat();
-
 }

@@ -7,10 +7,8 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
 import com.toedter.calendar.JDateChooser;
+import controller.KhuyenMaiController;
 import utils.ToolCtrl;
-//
-//import controller.KhuyenMaiCtrl;
-//import controller.ToolCtrl;
 import java.awt.*;
 
 public class ChiTietKhuyenMai_GUI extends JPanel {
@@ -20,7 +18,7 @@ public class ChiTietKhuyenMai_GUI extends JPanel {
     public JTable tblChiTietKM;
     public JButton btnThemThuoc, btnCapNhat, btnQuayLai;
     public JDateChooser dpNgayBD, dpNgayKT; 
-//    public KhuyenMaiCtrl kmCtrl;
+    public KhuyenMaiController kmCtrl;
     private final ToolCtrl tool = new ToolCtrl();
     public JTextField txtSoLuongMua;
     public JButton btnTru2;
@@ -37,7 +35,7 @@ public class ChiTietKhuyenMai_GUI extends JPanel {
 
 
     public ChiTietKhuyenMai_GUI() {
-//    	kmCtrl = new KhuyenMaiCtrl(this);
+    	kmCtrl = new KhuyenMaiController(this);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
@@ -184,7 +182,7 @@ public class ChiTietKhuyenMai_GUI extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
 
         // ====== SỰ KIỆN ======
-//        ganSuKien();
+        ganSuKien();
     }
     
     //========== XỬ LÝ SỰ KIỆN ==============

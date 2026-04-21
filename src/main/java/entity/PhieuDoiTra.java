@@ -16,6 +16,10 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "PhieuDoiTra")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PhieuDoiTra {
 
     @Id

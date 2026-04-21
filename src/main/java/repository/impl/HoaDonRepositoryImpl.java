@@ -61,7 +61,6 @@ public class HoaDonRepositoryImpl extends GenericJpa implements HoaDonRepository
         return doInTransaction(em -> {
             String jpql = "SELECT DISTINCT h.khachHang FROM HoaDon h " +
                     "WHERE h.ngayLap BETWEEN :ngayBD AND :ngayKT AND h.trangThai = true " ;
-//                    + "ORDER BY CAST(SUBSTRING(h.khachHang.maKH, 5, LENGTH(h.khachHang.maKH)) AS Integer)";
             return em.createQuery(jpql, KhachHang.class)
                     .setParameter("ngayBD", ngayBD)
                     .setParameter("ngayKT", ngayKT)

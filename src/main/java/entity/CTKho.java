@@ -16,13 +16,17 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "CT_Kho")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CTKho {
 
     @EmbeddedId
     private IdClass id = new IdClass();
 
     @Column(name = "soLuongTon", nullable = false)
-    private Double soLuongTon;
+    private int soLuongTon;
 
     @Nationalized
     @Column(name = "ghiChu", length = 255)
