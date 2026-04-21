@@ -211,8 +211,8 @@ public class ChiTietKhuyenMai_GUI extends JPanel {
         btnTru2.addActionListener(e -> giamGiaTri(txtSoLuongMua));
         cmbLoaiKM.addActionListener(e -> chonPhuongThucKM());
         chonPhuongThucKM();
-        kmCtrl.setDuLieuChoCmbThuoc(cmbThemThuoc);
-        btnThemThuoc.addActionListener(e -> kmCtrl.themThuocVaoBang());
+        //kmCtrl.setDuLieuChoCmbThuoc(cmbThemThuoc);
+        //btnThemThuoc.addActionListener(e -> kmCtrl.themThuocVaoBang());
         btnXoaThuoc.addActionListener(e -> kmCtrl.xoaThuocTuBang(tblChiTietKM));
     }
     

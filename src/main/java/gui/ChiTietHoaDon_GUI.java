@@ -1,5 +1,6 @@
 package gui;
 
+import controller.ChiTietHoaDonController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ public class ChiTietHoaDon_GUI extends JPanel {
 	public JLabel lblGhiChu, lblTongTien, lblTienNhan, lblTienThua;
 	public JTable tblThuoc;
 	public JButton btnInHoaDon, btnQuayLai, btnTaoPhieuDoiTra;
-//	public ChiTietHoaDonCtrl ctrl;
+	public ChiTietHoaDonController ctrl;
 
 	public TrangChuQL_GUI mainFrameQL;
 	public TrangChuNV_GUI mainFrameNV;
@@ -24,22 +25,21 @@ public class ChiTietHoaDon_GUI extends JPanel {
 	Font font1 = new Font("Times New Roman", Font.BOLD, 18);
 	Font font2 = new Font("Times New Roman", Font.PLAIN, 15);
 	public ToolCtrl tool = new ToolCtrl();
-//	public HoaDonDAO hdDAO = new HoaDonDAO();
 
-//	public ChiTietHoaDonCtrl getCtrl() {
-//		return ctrl;
-//	}
+	public ChiTietHoaDonController getCtrl() {
+		return ctrl;
+	}
 
 	public ChiTietHoaDon_GUI(TrangChuQL_GUI mainFrame) {
 		this.mainFrameQL = mainFrame;
 		initUI();
-//		this.ctrl = new ChiTietHoaDonCtrl(this);
+		this.ctrl = new ChiTietHoaDonController(this);
 	}
 
 	public ChiTietHoaDon_GUI(TrangChuNV_GUI mainFrame) {
 		this.mainFrameNV = mainFrame;
 		initUI();
-//		this.ctrl = new ChiTietHoaDonCtrl(this);
+		this.ctrl = new ChiTietHoaDonController(this);
 	}
 
 	public void initUI() {

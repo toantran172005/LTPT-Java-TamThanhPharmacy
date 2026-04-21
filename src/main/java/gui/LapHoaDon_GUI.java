@@ -1,5 +1,6 @@
 package gui;
 
+import controller.LapHoaDonController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class LapHoaDon_GUI extends JPanel {
 	public JButton btnThem, btnLamMoi, btnTaoHD, btnXoa;
 	public TrangChuQL_GUI mainFrame;
 	public TrangChuNV_GUI mainFrameNV;
-//	public LapHoaDonCtrl controller;
+	public LapHoaDonController controller;
 
 	Font font1 = new Font("Times New Roman", Font.BOLD, 18);
 	Font font2 = new Font("Times New Roman", Font.PLAIN, 15);
@@ -32,18 +33,18 @@ public class LapHoaDon_GUI extends JPanel {
 	public LapHoaDon_GUI(TrangChuQL_GUI mainFrame) {
 		this.mainFrame = mainFrame;
 		initUI();
-//		khoiTaoController();
+		khoiTaoController();
 	}
 
 	public LapHoaDon_GUI(TrangChuNV_GUI mainFrameNV) {
 		this.mainFrameNV = mainFrameNV;
 		initUI();
-//		khoiTaoController();
+		khoiTaoController();
 	}
 
-//	public void khoiTaoController() {
-//		this.controller = new LapHoaDonCtrl(this);
-//	}
+	public void khoiTaoController() {
+		this.controller = new LapHoaDonController(this);
+	}
 
 	public void initUI() {
 		setLayout(new BorderLayout(0, 15));
