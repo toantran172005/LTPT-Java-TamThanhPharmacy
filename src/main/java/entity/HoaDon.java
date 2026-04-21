@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "HoaDon")
+
 public class HoaDon {
     @Id
     @Column(name = "maHD", length = 20)
@@ -55,4 +56,6 @@ public class HoaDon {
     @JoinColumn(name = "maNV", nullable = false)
     private NhanVien nhanVien;
 
+    public HoaDon(String maHD, KhachHang khHD, NhanVien nv, String hinhThucTT, LocalDate now, String diaChiHT, String tenHT, String string, String hotline, double tienNhan, boolean b) {
+    }
 }

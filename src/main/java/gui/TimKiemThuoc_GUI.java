@@ -1,5 +1,6 @@
 package gui;
 
+import controller.ThuocController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -12,8 +13,7 @@ import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-//import controller.ThuocCtrl;
-//import controller.ToolCtrl;
+
 
 public class TimKiemThuoc_GUI extends JPanel {
 
@@ -21,15 +21,13 @@ public class TimKiemThuoc_GUI extends JPanel {
     public JTable tblThuoc;
     public DefaultTableModel model;
     public JButton btnXemChiTiet, btnLamMoi, btnLichSuXoa, btnXoa;
-    
-    // Đã thay đổi từ JComboBox sang JTextField
     public JTextField txtTenThuoc;
 
     public ToolCtrl tool = new ToolCtrl();
-//    public ThuocCtrl thCtrl;
+    public ThuocController thCtrl = new ThuocController();
 
     public TimKiemThuoc_GUI() {
-//        this.thCtrl = new ThuocCtrl(this);
+        this.thCtrl = new ThuocController(this);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
@@ -157,7 +155,7 @@ public class TimKiemThuoc_GUI extends JPanel {
 
         add(scroll, BorderLayout.CENTER);
 
-//        ganSuKien();
+        ganSuKien();
     }
 
     // ================== XỬ LÝ SỰ KIỆN ==================
@@ -165,23 +163,23 @@ public class TimKiemThuoc_GUI extends JPanel {
         txtTenThuoc.setText("");
         cmbLoaiThuoc.setSelectedItem("Tất cả"); 
         model.setRowCount(0);
-//        thCtrl.locTatCa(true);
+        thCtrl.locTatCa(true);
     }
 
     // gắn sự kiện
-//    public void ganSuKien() {
-//        thCtrl.locTatCa(true);
-//        btnXemChiTiet.addActionListener(e -> thCtrl.xemChiTiet());
-//        btnLamMoi.addActionListener(e -> onBtnLamMoi());
-//        btnLichSuXoa.addActionListener(e -> thCtrl.xuLyBtnLichSuXoa());
-//        btnXoa.addActionListener(e -> thCtrl.xoaThuoc());
-//        thCtrl.setCmbKeThuoc();
-//        cmbLoaiThuoc.addActionListener(e -> thCtrl.locTatCa(thCtrl.isHienThi));
-//        txtTenThuoc.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyReleased(KeyEvent e) {
-//                thCtrl.locTatCa(thCtrl.isHienThi);
-//            }
-//        });
-//    }
+    public void ganSuKien() {
+        thCtrl.locTatCa(true);
+        btnXemChiTiet.addActionListener(e -> thCtrl.xemChiTiet());
+        btnLamMoi.addActionListener(e -> onBtnLamMoi());
+        btnLichSuXoa.addActionListener(e -> thCtrl.xuLyBtnLichSuXoa());
+        btnXoa.addActionListener(e -> thCtrl.xoaThuoc());
+        thCtrl.setCmbKeThuoc();
+        cmbLoaiThuoc.addActionListener(e -> thCtrl.locTatCa(thCtrl.isHienThi));
+        txtTenThuoc.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                thCtrl.locTatCa(thCtrl.isHienThi);
+            }
+        });
+    }
 }

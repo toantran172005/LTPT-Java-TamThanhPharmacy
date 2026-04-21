@@ -3,13 +3,12 @@ package gui;
 import javax.swing.*;
 
 import com.toedter.calendar.JDateChooser;
+import controller.ChiTietThuocController;
+import controller.ThuocController;
 import utils.ToolCtrl;
 
 import java.awt.*;
 
-//import controller.ChiTietThuocCtrl;
-//import controller.ThuocCtrl;
-//import controller.ToolCtrl;
 
 public class ChiTietThuoc_GUI extends JPanel {
 
@@ -19,15 +18,15 @@ public class ChiTietThuoc_GUI extends JPanel {
     public JComboBox<String> cmbDonViTinh, cmbThue, cmbKeThuoc;
     public JDateChooser dpHanSuDung;
     public ToolCtrl tool = new ToolCtrl();
-//    public ThuocCtrl thCtrl;
-//    public ChiTietThuocCtrl ctCtrl;
+    public ThuocController thCtrl;
+    public ChiTietThuocController ctCtrl;
     public JComboBox<String> cmbQuocGia;
     public String maThuoc;
 
     public ChiTietThuoc_GUI(String maThuoc) {
     	
-//    	this.thCtrl = new ThuocCtrl(this);
-//    	this.ctCtrl = new ChiTietThuocCtrl(this);
+    	this.thCtrl = new ThuocController(this);
+        this.ctCtrl = new ChiTietThuocController(this);
     	this.maThuoc = maThuoc;
     	
         setLayout(new BorderLayout());
@@ -149,24 +148,24 @@ public class ChiTietThuoc_GUI extends JPanel {
         add(centerPanel, BorderLayout.CENTER);
         
         //=========== GẮN SỰ KIỆN ================
-//        ganSuKien();
+        ganSuKien();
         thietLapKhoaChinhSua(false);
     }
     
     //========= XỬ LÝ ================
 
 	//gắn sự kiện
-//    public void ganSuKien() {
-//    	ctCtrl.setCmbDonVi();
-//    	ctCtrl.setCmbKeThuoc();
-//    	ctCtrl.setCmbQuocGia();
-//    	ctCtrl.setCmbThue();
-//
-//    	ctCtrl.xemChiTietThuoc(maThuoc);
-//    	btnQuayLai.addActionListener(e -> ctCtrl.quayLaiTrangTimKiem());
-//    	btnChonAnh.addActionListener(e -> ctCtrl.chonAnh());
-//    	btnCapNhat.addActionListener(e -> ctCtrl.xuLyCapNhat());
-//    }
+    public void ganSuKien() {
+    	ctCtrl.setCmbDonVi();
+    	ctCtrl.setCmbKeThuoc();
+    	ctCtrl.setCmbQuocGia();
+    	ctCtrl.setCmbThue();
+
+    	ctCtrl.xemChiTietThuoc(maThuoc);
+    	btnQuayLai.addActionListener(e -> ctCtrl.quayLaiTrangTimKiem());
+    	btnChonAnh.addActionListener(e -> ctCtrl.chonAnh());
+    	btnCapNhat.addActionListener(e -> ctCtrl.xuLyCapNhat());
+    }
 
     public JPanel taoDong(String text, JComponent comp) {
         JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
