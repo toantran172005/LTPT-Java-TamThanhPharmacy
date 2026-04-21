@@ -1,5 +1,6 @@
 package gui;
 
+import controller.DonViTinhController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -21,10 +22,10 @@ public class DonVi_GUI extends JPanel {
 	public DefaultTableModel model;
 
 	public ToolCtrl tool = new ToolCtrl();
-//	public DonViTinhCtrl dvCtrl;
+	public DonViTinhController dvCtrl;
 
 	public DonVi_GUI() {
-//		dvCtrl = new DonViTinhCtrl(this);
+		dvCtrl = new DonViTinhController(this);
 		setLayout(new BorderLayout());
 		setBackground(Color.WHITE);
 
@@ -149,7 +150,7 @@ public class DonVi_GUI extends JPanel {
 		add(scroll, BorderLayout.CENTER);
 
 		// ===== SỰ KIỆN =====
-//		ganSuKien();
+		ganSuKien();
 	}
 
 	public JPanel taoDong(String label, JComponent comp, int labelWidth, int fieldWidth) {
@@ -165,19 +166,19 @@ public class DonVi_GUI extends JPanel {
 
 		return row;
 	}
-//
-//	public void ganSuKien() {
-//		dvCtrl.locTatCa(true);
-//		btnThemDV.addActionListener(e -> dvCtrl.themDonVi());
-//	    btnXoa.addActionListener(e -> dvCtrl.xoaDonVi());
-//	    btnLichSuXoa.addActionListener(e -> dvCtrl.xuLyBtnLichSuXoa());
-//	    btnLamMoi.addActionListener(e -> dvCtrl.lamMoi());
-//	    txtTimDV.addKeyListener(new java.awt.event.KeyAdapter() {
-//	        @Override
-//	        public void keyReleased(java.awt.event.KeyEvent evt) {
-//	            dvCtrl.locTatCa(dvCtrl.isHienThi);
-//	        }
-//	    });
-//	}
+
+	public void ganSuKien() {
+		dvCtrl.locTatCa(true);
+		btnThemDV.addActionListener(e -> dvCtrl.themDonVi());
+	    btnXoa.addActionListener(e -> dvCtrl.xoaDonVi());
+	    btnLichSuXoa.addActionListener(e -> dvCtrl.xuLyBtnLichSuXoa());
+	    btnLamMoi.addActionListener(e -> dvCtrl.lamMoi());
+	    txtTimDV.addKeyListener(new java.awt.event.KeyAdapter() {
+	        @Override
+	        public void keyReleased(java.awt.event.KeyEvent evt) {
+	            dvCtrl.locTatCa(dvCtrl.isHienThi);
+	        }
+	    });
+	}
 
 }

@@ -41,9 +41,6 @@ public class Thuoc {
     @Column(name = "anh", length = 100)
     private String anh;
 
-    @Column(name = "soLuong", nullable = false)
-    private int soLuong;
-
    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "maThue", nullable = false)
     private Thue thue;

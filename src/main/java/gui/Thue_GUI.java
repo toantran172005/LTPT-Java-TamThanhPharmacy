@@ -1,5 +1,6 @@
 package gui;
 
+import controller.ThueController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -23,10 +24,10 @@ public class Thue_GUI extends JPanel {
     public JTextField txtTimKiem;
     
     public ToolCtrl tool = new ToolCtrl();
-//    public ThueCtrl thueCtrl;
+    public ThueController thueCtrl;
 
     public Thue_GUI() {
-//        this.thueCtrl = new ThueCtrl(this);
+        this.thueCtrl = new ThueController(this);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
@@ -171,41 +172,41 @@ public class Thue_GUI extends JPanel {
         add(centerPanel, BorderLayout.CENTER);
 
         // ===== Event Handlers =====
-//        ganSuKien();
+        ganSuKien();
     }
 
-//    public void ganSuKien() {
-//        // Load dữ liệu khi mở giao diện
-//        thueCtrl.loadData();
-//
-//        // Sự kiện click bảng
-//        tblThue.addMouseListener(new java.awt.event.MouseAdapter() {
-//            @Override
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                int row = tblThue.getSelectedRow();
-//                if (row >= 0) {
-//                    txtMaThue.setText(model.getValueAt(row, 0).toString());
-//                    txtLoaiThue.setText(model.getValueAt(row, 1).toString());
-//                    String tyLeStr = model.getValueAt(row, 2).toString().replace("%", "");
-//                    txtTyLeThue.setText(tyLeStr);
-//                    Object moTa = model.getValueAt(row, 3);
-//                    txtMoTa.setText(moTa != null ? moTa.toString() : "");
-//                }
-//            }
-//        });
-//
-//        // Sự kiện các nút chức năng
-//        btnThem.addActionListener(e -> thueCtrl.themThue());
-//        btnSua.addActionListener(e -> thueCtrl.suaThue());
-//        btnXoa.addActionListener(e -> thueCtrl.xoaThue());
-//        btnLamMoi.addActionListener(e -> thueCtrl.lamMoi());
-//
-//        // Sự kiện tìm kiếm khi gõ phím
-//        txtTimKiem.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyReleased(KeyEvent e) {
-//                thueCtrl.timKiem();
-//            }
-//        });
-//    }
+    public void ganSuKien() {
+        // Load dữ liệu khi mở giao diện
+        thueCtrl.loadData();
+
+        // Sự kiện click bảng
+        tblThue.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = tblThue.getSelectedRow();
+                if (row >= 0) {
+                    txtMaThue.setText(model.getValueAt(row, 0).toString());
+                    txtLoaiThue.setText(model.getValueAt(row, 1).toString());
+                    String tyLeStr = model.getValueAt(row, 2).toString().replace("%", "");
+                    txtTyLeThue.setText(tyLeStr);
+                    Object moTa = model.getValueAt(row, 3);
+                    txtMoTa.setText(moTa != null ? moTa.toString() : "");
+                }
+            }
+        });
+
+        // Sự kiện các nút chức năng
+        btnThem.addActionListener(e -> thueCtrl.themThue());
+        btnSua.addActionListener(e -> thueCtrl.suaThue());
+        btnXoa.addActionListener(e -> thueCtrl.xoaThue());
+        btnLamMoi.addActionListener(e -> thueCtrl.lamMoi());
+
+        // Sự kiện tìm kiếm khi gõ phím
+        txtTimKiem.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                thueCtrl.timKiem();
+            }
+        });
+    }
 }

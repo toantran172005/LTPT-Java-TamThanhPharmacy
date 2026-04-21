@@ -83,7 +83,7 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
         try {
             inTransaction(em -> {
                 // Lấy tỉ lệ quy đổi
-                String jpqlTiLe = "SELECT td.tiLe FROM ThuocDonViTinh td WHERE td.thuoc.maThuoc = :maThuoc AND td.dvt.maDVT = :maDVT";
+                String jpqlTiLe = "SELECT td.tiLe FROM ThuocDonViTinh td WHERE td.thuoc.maThuoc = :maThuoc AND td.donViTinh.maDVT = :maDVT";
                 Double tiLe = 1.0;
                 try {
                     tiLe = em.createQuery(jpqlTiLe, Double.class)
@@ -223,27 +223,16 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
     @Override
     public List<Thuoc> layListThuocHoanChinh() {
         return doInTransaction(em -> {
-            String jpql = "SELECT t FROM Thuoc t " +
-                    "LEFT JOIN FETCH t.keThuoc " +
-                    "LEFT JOIN FETCH t.donViTinh " +
-                    "LEFT JOIN FETCH t.quocGia " +
-                    "ORDER BY t.maThuoc";
+            String jpql = "SELECT t FROM Thuoc t ORDER BY t.maThuoc";
             return em.createQuery(jpql, Thuoc.class).getResultList();
         });
     }
 
     @Override
-    public List<Thuoc> layListThuoc(boolean isTrangThai) {
+    public List<Thuoc> layListThuoc() {
         return doInTransaction(em -> {
-            String jpql = "SELECT t FROM Thuoc t " +
-                    "LEFT JOIN FETCH t.keThuoc " +
-                    "LEFT JOIN FETCH t.donViTinh " +
-                    "LEFT JOIN FETCH t.quocGia " +
-                    "WHERE t.trangThai = :trangThai " +
-                    "ORDER BY t.maThuoc";
-            return em.createQuery(jpql, Thuoc.class)
-                    .setParameter("trangThai", isTrangThai)
-                    .getResultList();
+            String jpql = "SELECT t FROM Thuoc t WHERE t.trangThai = true";
+            return em.createQuery(jpql, Thuoc.class).getResultList();
         });
     }
 
@@ -272,7 +261,6 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
         });
     }
 
-    // Gộp logic xoá và khôi phục (find -> setTrangThai -> merge)
     @Override
     public boolean capNhatTrangThaiThuoc(String maThuoc, boolean trangThai) {
         try {
@@ -328,11 +316,38 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
     public int laySoLuongTon(String maThuoc) {
         return doInTransaction(em -> {
             try {
+                // Sử dụng Number.class thay vì Integer.class để tránh lỗi Mismatch
                 String jpql = "SELECT c.soLuongTon FROM CTKho c WHERE c.thuoc.maThuoc = :maThuoc";
-                return em.createQuery(jpql, Integer.class).setParameter("maThuoc", maThuoc).getSingleResult();
+
+                Number result = em.createQuery(jpql, Number.class)
+                        .setParameter("maThuoc", maThuoc)
+                        .getSingleResult();
+
+                // Trả về giá trị int, nếu null thì mặc định là 0
+                return (result != null) ? result.intValue() : 0;
             } catch (NoResultException e) {
                 return 0;
             }
+        });
+    }
+
+    @Override
+    public List<QuocGia> layListQG() {
+        return doInTransaction(em -> em.createQuery("SELECT q FROM QuocGia q", QuocGia.class).getResultList());
+    }
+
+    @Override
+    public List<Thuoc> layListThuoc(boolean isTrangThai) {
+        return doInTransaction(em -> {
+            String jpql = "SELECT t FROM Thuoc t " +
+                    "LEFT JOIN FETCH t.keThuoc " +
+                    "LEFT JOIN FETCH t.donViTinh " +
+                    "LEFT JOIN FETCH t.quocGia " +
+                    "WHERE t.trangThai = :trangThai " +
+                    "ORDER BY t.maThuoc";
+            return em.createQuery(jpql, Thuoc.class)
+                    .setParameter("trangThai", isTrangThai)
+                    .getResultList();
         });
     }
 
@@ -366,7 +381,7 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
                     throw new RuntimeException("Tồn kho không đủ");
                 }
 
-                ctKho.setSoLuongTon(tonMoi);
+                ctKho.setSoLuongTon((double) tonMoi);
                 em.merge(ctKho);
             });
 
@@ -376,10 +391,5 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
             e.printStackTrace();
             return false;
         }
-    }
-
-    @Override
-    public List<QuocGia> layListQG() {
-        return doInTransaction(em -> em.createQuery("SELECT q FROM QuocGia q", QuocGia.class).getResultList());
     }
 }
