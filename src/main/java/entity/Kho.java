@@ -14,10 +14,6 @@ import org.hibernate.annotations.Nationalized;
 
 @Entity
 @Table(name = "Kho")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Kho {
 
     @Id

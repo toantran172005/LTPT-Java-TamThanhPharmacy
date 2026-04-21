@@ -2,6 +2,7 @@ package controller;
 
 import service.HoaDonService;
 //import service.PhieuDoiTraService;
+import service.PhieuDoiTraService;
 import service.ThuocService;
 import entity.HoaDon;
 import gui.*;
@@ -21,7 +22,7 @@ public class ChiTietHoaDonController {
     public HoaDonService hdService = new HoaDonService(); // Dùng Service thay vì DAO
     public ToolCtrl tool = new ToolCtrl();
     public ThuocService thuocService = new ThuocService();
-    //public PhieuDoiTraService pdtService = new PhieuDoiTraService();
+    public PhieuDoiTraService pdtService = new PhieuDoiTraService();
     public HoaDon hd;
 
     public ChiTietHoaDonController(ChiTietHoaDon_GUI gui) {
@@ -33,7 +34,7 @@ public class ChiTietHoaDonController {
     public void suKien() {
         gui.getBtnQuayLai().addActionListener(e -> quayLai());
         gui.getBtnInHoaDon().addActionListener(e -> xuatHoaDonRaTXT());
-        //gui.getBtnTaoPhieuDoiTra().addActionListener(e -> taoPhieuDoiTra());
+        gui.getBtnTaoPhieuDoiTra().addActionListener(e -> taoPhieuDoiTra());
     }
 
     // ========== HIỂN THỊ THÔNG TIN HOÁ ĐƠN ==========
@@ -158,29 +159,29 @@ public class ChiTietHoaDonController {
     }
 
     // ========== TẠO PHIẾU ĐỔI TRẢ ==========
-//    public void taoPhieuDoiTra() {
-//        if (pdtService.kiemTraHoaDonDaDoiTra(hd.getMaHD())) {
-//            tool.hienThiThongBao("Tạo phiếu đổi trả", "Hóa đơn này đã tạo phiếu đổi trả", false);
-//            return;
-//        } else {
-//            String maHD = gui.getLblMaHD().getText();
-//            if (maHD.isEmpty()) {
-//                tool.hienThiThongBao("Lỗi", "Không có hóa đơn để đổi trả!", false);
-//                return;
-//            }
-//
-//            LapPhieuDoiTra_GUI panel = new LapPhieuDoiTra_GUI();
-//            panel.setTrangChuQL(gui.getMainFrameQL());
-//            panel.setTrangChuNV(gui.getMainFrameNV());
-//
-//            LapPhieuDoiTraCtrl ctrl = new LapPhieuDoiTraCtrl(panel);
-//            ctrl.setMaHD(maHD);
-//
-//            if (gui.getMainFrameQL() != null) {
-//                gui.getMainFrameQL().setUpNoiDung(panel);
-//            } else if (gui.getMainFrameNV() != null) {
-//                gui.getMainFrameNV().setUpNoiDung(panel);
-//            }
-//        }
-//    }
+    public void taoPhieuDoiTra() {
+        if (pdtService.kiemTraHoaDonDaDoiTra(hd.getMaHD())) {
+            tool.hienThiThongBao("Tạo phiếu đổi trả", "Hóa đơn này đã tạo phiếu đổi trả", false);
+            return;
+        } else {
+            String maHD = gui.getLblMaHD().getText();
+            if (maHD.isEmpty()) {
+                tool.hienThiThongBao("Lỗi", "Không có hóa đơn để đổi trả!", false);
+                return;
+            }
+
+            LapPhieuDoiTra_GUI panel = new LapPhieuDoiTra_GUI();
+            panel.setTrangChuQL(gui.getMainFrameQL());
+            panel.setTrangChuNV(gui.getMainFrameNV());
+
+            LapPhieuDoiTraController ctrl = new LapPhieuDoiTraController(panel);
+            ctrl.setMaHD(maHD);
+
+            if (gui.getMainFrameQL() != null) {
+                gui.getMainFrameQL().setUpNoiDung(panel);
+            } else if (gui.getMainFrameNV() != null) {
+                gui.getMainFrameNV().setUpNoiDung(panel);
+            }
+        }
+    }
 }

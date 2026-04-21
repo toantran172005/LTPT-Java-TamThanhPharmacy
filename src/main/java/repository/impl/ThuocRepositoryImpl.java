@@ -98,9 +98,9 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
                 CTKho ctKho = em.createQuery(jpqlKho, CTKho.class).setParameter("maThuoc", maThuoc).getSingleResult();
 
                 if(isTang) {
-                    ctKho.setSoLuongTon((double) (ctKho.getSoLuongTon() + soLuongThucTe));
+                    ctKho.setSoLuongTon((int) (ctKho.getSoLuongTon() + soLuongThucTe));
                 } else {
-                    ctKho.setSoLuongTon((double) (ctKho.getSoLuongTon() - soLuongThucTe));
+                    ctKho.setSoLuongTon((int) (ctKho.getSoLuongTon() - soLuongThucTe));
                 }
                 em.merge(ctKho);
             });
@@ -381,7 +381,7 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
                     throw new RuntimeException("Tồn kho không đủ");
                 }
 
-                ctKho.setSoLuongTon((double) tonMoi);
+                ctKho.setSoLuongTon((int) tonMoi);
                 em.merge(ctKho);
             });
 

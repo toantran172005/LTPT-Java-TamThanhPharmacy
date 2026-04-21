@@ -111,7 +111,7 @@ public class TimKiemHDController {
             trangChuNV.setUpNoiDung(chiTietPanel);
         } else return;
 
-        //chiTietPanel.getCtrl().hienThiThongTinHoaDon(hoaDon);
+        chiTietPanel.getCtrl().hienThiThongTinHoaDon(hoaDon);
     }
 
     public void xemLichSuXoa() {

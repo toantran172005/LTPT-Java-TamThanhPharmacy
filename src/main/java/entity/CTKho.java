@@ -16,10 +16,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "CT_Kho")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class CTKho {
 
     @EmbeddedId
