@@ -1,5 +1,6 @@
 package gui;
 
+import controller.TimKiemHDController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -26,13 +27,13 @@ public class TimKiemHD_GUI extends JPanel {
 	public TimKiemHD_GUI(TrangChuQL_GUI mainFrame) {
 		this.mainFrame = mainFrame;
 		initUI();
-//		new TimKiemHDCtrl(this);
+		new TimKiemHDController(this);
 	}
 
 	public TimKiemHD_GUI(TrangChuNV_GUI mainFrameNV) {
 		this.mainFrameNV = mainFrameNV;
 		initUI();
-//		new TimKiemHDCtrl(this);
+		new TimKiemHDController(this);
 	}
 
 	public void initUI() {

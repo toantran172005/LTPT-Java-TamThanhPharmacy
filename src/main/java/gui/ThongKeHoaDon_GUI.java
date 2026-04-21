@@ -13,6 +13,11 @@ import javax.swing.table.JTableHeader;
 //import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.toedter.calendar.JDateChooser;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import utils.ToolCtrl;
 
 //import controller.ToolCtrl;
@@ -25,7 +30,7 @@ public class ThongKeHoaDon_GUI extends JPanel {
 	public JComboBox<String> cmbTopTK;
 	public JTable tblThongKeHD;
 	public JPanel mainCenter;
-//	public ChartPanel chartPanel;
+	public ChartPanel chartPanel;
 	public JPanel pnlBieuDo;
 
 	Font font1 = new Font("Times New Roman", Font.BOLD, 18);
@@ -96,21 +101,21 @@ public class ThongKeHoaDon_GUI extends JPanel {
 		pnlBieuDo.setMaximumSize(new Dimension(Short.MAX_VALUE, 320)); // KHÓA CHIỀU CAO
 		pnlBieuDo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-//		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//
-//		JFreeChart chart = ChartFactory.createLineChart("Doanh thu theo ngày", "Ngày", "Doanh thu (VND)", dataset,
-//				PlotOrientation.VERTICAL, false, true, false);
-//
-//		chartPanel = new ChartPanel(chart);
-//		chartPanel.setPreferredSize(new Dimension(850, 250));
-//		chartPanel.setMaximumSize(new Dimension(850, 250));
-//		chartPanel.setMinimumSize(new Dimension(850, 250));
-//		chartPanel.setMouseWheelEnabled(true);
-//		chartPanel.setDomainZoomable(false);
-//		chartPanel.setRangeZoomable(false);
-//
-//		// ===== Đảm bảo biểu đồ không tự mở rộng trong BoxLayout =====
-//		pnlBieuDo.add(chartPanel, BorderLayout.CENTER);
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+		JFreeChart chart = ChartFactory.createLineChart("Doanh thu theo ngày", "Ngày", "Doanh thu (VND)", dataset,
+				PlotOrientation.VERTICAL, false, true, false);
+
+		chartPanel = new ChartPanel(chart);
+		chartPanel.setPreferredSize(new Dimension(850, 250));
+		chartPanel.setMaximumSize(new Dimension(850, 250));
+		chartPanel.setMinimumSize(new Dimension(850, 250));
+		chartPanel.setMouseWheelEnabled(true);
+		chartPanel.setDomainZoomable(false);
+		chartPanel.setRangeZoomable(false);
+
+		// ===== Đảm bảo biểu đồ không tự mở rộng trong BoxLayout =====
+		pnlBieuDo.add(chartPanel, BorderLayout.CENTER);
 		mainCenter.add(pnlBieuDo);
 
 		// ===== Bảng Top khách hàng =====
@@ -171,7 +176,7 @@ public class ThongKeHoaDon_GUI extends JPanel {
 
 		mainPanel.add(scrollMainCenter, BorderLayout.CENTER);
 
-//		new controller.ThongKeHoaDonCtrl(this);
+		new controller.ThongKeHDController(this);
 	}
 
 	// ========== GETTER ==========
@@ -219,9 +224,9 @@ public class ThongKeHoaDon_GUI extends JPanel {
 		return mainCenter;
 	}
 
-//	public ChartPanel getChartPanel() {
-//		return chartPanel;
-//	}
+	public ChartPanel getChartPanel() {
+		return chartPanel;
+	}
 
 	public JPanel getPnlBieuDo() {
 		return pnlBieuDo;

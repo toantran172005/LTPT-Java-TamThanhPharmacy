@@ -5,6 +5,7 @@ import repository.impl.KhachHangRepositoryImpl;
 import repository.intf.KhachHangRepository;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,19 +18,11 @@ public class KhachHangService {
         this.khachHangRepo = new KhachHangRepositoryImpl();
     }
 
-    public KhachHang timKhachHangTheoSDT(String sdt) {
-        if (sdt == null || sdt.trim().isEmpty()) return null;
-        return khachHangRepo.timKhachHangTheoSDT(sdt.trim());
-    }
-
-    public KhachHang timKhachHangTheoMa(String maKH) {
-        if (maKH == null || maKH.trim().isEmpty()) return null;
-        return khachHangRepo.timKhachHangTheoMa(maKH.trim());
-    }
+    // ================== CÁC HÀM THÊM / CẬP NHẬT / XÓA ==================
 
     public boolean themKhachHang(KhachHang kh) {
-        // Validation cơ bản trước khi xuống DB
-        if (kh == null || kh.getMaKH() == null || kh.getTenKH() == null || kh.getTenKH().trim().isEmpty()) {
+        if (kh == null || kh.getMaKH() == null || kh.getMaKH().trim().isEmpty() ||
+                kh.getTenKH() == null || kh.getTenKH().trim().isEmpty()) {
             return false;
         }
         if (kh.getTuoi() <= 0) {
@@ -40,9 +33,11 @@ public class KhachHangService {
     }
 
     // Support hàm thêm khách hàng mới với tham số String truyền từ giao diện
-    public boolean themKhachHangMoi(String maKH, String tenKH, String sdt, String tuoiStr) {
+
+    public boolean themKhachHang(String maKH, String tenKH, String sdt, String tuoiStr) {
+        if (tuoiStr == null || tuoiStr.trim().isEmpty()) return false;
         try {
-            int tuoi = Integer.parseInt(tuoiStr);
+            int tuoi = Integer.parseInt(tuoiStr.trim());
             KhachHang kh = new KhachHang(maKH, tenKH, sdt, tuoi, true);
             return themKhachHang(kh);
         } catch (NumberFormatException e) {
@@ -52,6 +47,9 @@ public class KhachHangService {
 
     public boolean capNhatKhachHang(KhachHang kh) {
         if (kh == null || kh.getMaKH() == null || kh.getMaKH().trim().isEmpty()) {
+            return false;
+        }
+        if (kh.getTuoi() <= 0) {
             return false;
         }
         return khachHangRepo.capNhatKhachHang(kh);
@@ -67,20 +65,30 @@ public class KhachHangService {
         return khachHangRepo.khoiPhucKhachHang(maKH.trim());
     }
 
+    // ================== CÁC HÀM LẤY DANH SÁCH & THỐNG KÊ ==================
+
     public List<KhachHang> layListKhachHang() {
         return khachHangRepo.layListKhachHang();
     }
 
     public List<KhachHang> layListKHThongKe(LocalDate ngayBD, LocalDate ngayKT) {
-        if (ngayBD == null || ngayKT == null) return null;
+        if (ngayBD == null || ngayKT == null) throw new IllegalArgumentException("Ngày không được để trống.");
+        if (ngayBD.isAfter(ngayKT)) throw new IllegalArgumentException("Ngày bắt đầu không được lớn hơn ngày kết thúc.");
+
         return khachHangRepo.layListKHThongKe(ngayBD, ngayKT);
     }
 
     public Map<String, Integer> layTongDonHangTheoNgay(LocalDate ngayBD, LocalDate ngayKT) {
+        if (ngayBD == null || ngayKT == null) return new HashMap<>();
+        if (ngayBD.isAfter(ngayKT)) return new HashMap<>();
+
         return khachHangRepo.layTongDonHangTheoNgay(ngayBD, ngayKT);
     }
 
     public Map<String, Double> layTongTienTheoNgay(LocalDate ngayBD, LocalDate ngayKT) {
+        if (ngayBD == null || ngayKT == null) return new HashMap<>();
+        if (ngayBD.isAfter(ngayKT)) return new HashMap<>();
+
         return khachHangRepo.layTongTienTheoNgay(ngayBD, ngayKT);
     }
 
@@ -90,5 +98,17 @@ public class KhachHangService {
 
     public Map<String, Double> layTatCaTongTien() {
         return khachHangRepo.layTatCaTongTien();
+    }
+
+    // ================== CÁC HÀM TÌM KIẾM ĐƠN LẺ ==================
+
+    public KhachHang timKhachHangTheoSDT(String sdt) {
+        if (sdt == null || sdt.trim().isEmpty()) return null;
+        return khachHangRepo.timKhachHangTheoSDT(sdt.trim());
+    }
+
+    public KhachHang timKhachHangTheoMa(String maKH) {
+        if (maKH == null || maKH.trim().isEmpty()) return null;
+        return khachHangRepo.timKhachHangTheoMa(maKH.trim());
     }
 }

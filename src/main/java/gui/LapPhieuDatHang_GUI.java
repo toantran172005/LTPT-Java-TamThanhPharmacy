@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import com.toedter.calendar.JDateChooser;
+import controller.LapPhieuDatHangController;
 import utils.ToolCtrl;
 
 //import controller.LapPhieuDatHangCtrl;
@@ -25,36 +26,36 @@ public class LapPhieuDatHang_GUI extends JPanel {
 	Font font1 = new Font("Time New Roman", Font.BOLD, 18);
 	Font font2 = new Font("Time New Roman", Font.PLAIN, 15);
 	public ToolCtrl tool = new ToolCtrl();
-//	public LapPhieuDatHangCtrl lpdhCtrl = new LapPhieuDatHangCtrl(this);
+	public LapPhieuDatHangController lpdhCtrl = new LapPhieuDatHangController(this);
 	public DefaultTableModel model;
 	public TrangChuQL_GUI trangChuQL;
 	public TrangChuNV_GUI trangChuNV;
 	
-//	public void setUpDuLieu() {
-//		lpdhCtrl.setUpComboBox();
-//		lpdhCtrl.setUpGoiY();
-//	}
+	public void setUpDuLieu() {
+		lpdhCtrl.setUpComboBox();
+		lpdhCtrl.setUpGoiY();
+	}
 	
-//	public void setHoatDong() {
-//		btnLamMoi.addActionListener(e -> lpdhCtrl.lamMoi());
-//		btnThem.addActionListener(e -> lpdhCtrl.themVaoTable());
-//		btnXoa.addActionListener(e -> lpdhCtrl.xoaThuoc());
-//		btnTaoPhieuDat.addActionListener(e -> lpdhCtrl.taoPhieuDat());
-//	}
+	public void setHoatDong() {
+		btnLamMoi.addActionListener(e -> lpdhCtrl.lamMoi());
+		btnThem.addActionListener(e -> lpdhCtrl.themVaoTable());
+		btnXoa.addActionListener(e -> lpdhCtrl.xoaThuoc());
+		btnTaoPhieuDat.addActionListener(e -> lpdhCtrl.taoPhieuDat());
+	}
 	
-//	public LapPhieuDatHang_GUI(TrangChuQL_GUI trangChuQL) {
-//	    this.trangChuQL = trangChuQL;
-//	    initUI();
-//	    setUpDuLieu();
-//	    setHoatDong();
-//	}
+	public LapPhieuDatHang_GUI(TrangChuQL_GUI trangChuQL) {
+	    this.trangChuQL = trangChuQL;
+	    initUI();
+	    setUpDuLieu();
+	    setHoatDong();
+	}
 	
-//	public LapPhieuDatHang_GUI(TrangChuNV_GUI trangChuNV) {
-//	    this.trangChuNV = trangChuNV;
-//	    initUI();
-//	    setUpDuLieu();
-//	    setHoatDong();
-//	}
+	public LapPhieuDatHang_GUI(TrangChuNV_GUI trangChuNV) {
+	    this.trangChuNV = trangChuNV;
+	    initUI();
+	    setUpDuLieu();
+	    setHoatDong();
+	}
 
 	public void initUI() {
 		setLayout(new BorderLayout(0, 15));

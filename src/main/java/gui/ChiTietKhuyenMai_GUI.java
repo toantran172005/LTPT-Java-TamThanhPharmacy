@@ -188,35 +188,34 @@ public class ChiTietKhuyenMai_GUI extends JPanel {
     }
     
     //========== XỬ LÝ SỰ KIỆN ==============
-    
-//    public void ganSuKien() {
-//    	kmCtrl.thietLapTrangThaiSua(false);
-//
-//    	btnCapNhat.addActionListener(e -> {
-//            if (btnCapNhat.getText().equalsIgnoreCase("Cập nhật")) {
-//                kmCtrl.thietLapTrangThaiSua(true);
-//            } else {
-//                kmCtrl.luuCapNhat();
-//            }
-//        });
-//
-//    	btnQuayLai.addActionListener(e -> {
-//    	    JPanel parent = (JPanel) this.getParent();
-//    	    tool.doiPanel(parent, new DanhSachKhuyenMai_GUI());
-//    	});
-//    	cmbLoaiKM.addActionListener(e -> chonPhuongThucKM());
-//        btnCong.addActionListener(e -> tangGiaTri(txtMucKM));
-//        btnTru.addActionListener(e -> giamGiaTri(txtMucKM));
-//        btnCong1.addActionListener(e -> tangGiaTri(txtSoLuongTang));
-//        btnTru1.addActionListener(e -> giamGiaTri(txtSoLuongTang));
-//        btnCong2.addActionListener(e -> tangGiaTri(txtSoLuongMua));
-//        btnTru2.addActionListener(e -> giamGiaTri(txtSoLuongMua));
-//        cmbLoaiKM.addActionListener(e -> chonPhuongThucKM());
-//        chonPhuongThucKM();
-//        kmCtrl.setDuLieuChoCmbThuoc(cmbThemThuoc);
-//        btnThemThuoc.addActionListener(e -> kmCtrl.themThuocVaoBang());
-//        btnXoaThuoc.addActionListener(e -> kmCtrl.xoaThuocTuBang(tblChiTietKM));
-//    }
+    public void ganSuKien() {
+    	kmCtrl.thietLapTrangThaiSua(false);
+
+    	btnCapNhat.addActionListener(e -> {
+            if (btnCapNhat.getText().equalsIgnoreCase("Cập nhật")) {
+                kmCtrl.thietLapTrangThaiSua(true);
+            } else {
+                kmCtrl.luuCapNhat();
+            }
+        });
+
+    	btnQuayLai.addActionListener(e -> {
+    	    JPanel parent = (JPanel) this.getParent();
+    	    tool.doiPanel(parent, new DanhSachKhuyenMai_GUI());
+    	});
+    	cmbLoaiKM.addActionListener(e -> chonPhuongThucKM());
+        btnCong.addActionListener(e -> tangGiaTri(txtMucKM));
+        btnTru.addActionListener(e -> giamGiaTri(txtMucKM));
+        btnCong1.addActionListener(e -> tangGiaTri(txtSoLuongTang));
+        btnTru1.addActionListener(e -> giamGiaTri(txtSoLuongTang));
+        btnCong2.addActionListener(e -> tangGiaTri(txtSoLuongMua));
+        btnTru2.addActionListener(e -> giamGiaTri(txtSoLuongMua));
+        cmbLoaiKM.addActionListener(e -> chonPhuongThucKM());
+        chonPhuongThucKM();
+        //kmCtrl.setDuLieuChoCmbThuoc(cmbThemThuoc);
+        //btnThemThuoc.addActionListener(e -> kmCtrl.themThuocVaoBang());
+        btnXoaThuoc.addActionListener(e -> kmCtrl.xoaThuocTuBang(tblChiTietKM));
+    }
     
     public void tangGiaTri(JTextField txt) {
         try {

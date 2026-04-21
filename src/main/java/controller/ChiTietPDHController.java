@@ -4,6 +4,7 @@ import entity.PhieuDatHang;
 import gui.ChiTietPhieuDatHang_GUI;
 import gui.LapHoaDon_GUI;
 import gui.TimKiemPhieuDatHang_GUI;
+import service.DonViTinhService;
 import service.PhieuDatHangService;
 import service.ThuocService;
 import utils.ToolCtrl;
@@ -15,7 +16,7 @@ public class ChiTietPDHController {
 
     // NÂNG CẤP: Thay thế toàn bộ DAO bằng Service
     public PhieuDatHangService pdhService = new PhieuDatHangService();
-//    public DonViTinhService dvtService = new DonViTinhService();
+    public DonViTinhService dvtService = new DonViTinhService();
     public ThuocService thService = new ThuocService();
 
     public ChiTietPDHController(ChiTietPhieuDatHang_GUI ctpdhGUI) {
@@ -23,24 +24,24 @@ public class ChiTietPDHController {
         this.ctpdhGUI = ctpdhGUI;
     }
 
-//    public void taoHoaDon() {
-//        if (ctpdhGUI.btnCapNhat.getText().equals("Lưu")) {
-//            tool.hienThiThongBao("Tạo hóa đơn", "Vui lòng lưu phiếu trước khi tạo hóa đơn", false);
-//            return;
-//        } else if (ctpdhGUI.pdh.getTrangThai().equals("Đã hủy")) {
-//            tool.hienThiThongBao("Tạo hóa đơn", "Không thể tạo hóa đơn với phiếu đã hủy!", false);
-//            return;
-//        } else if (ctpdhGUI.daChuyenHD) {
-//            tool.hienThiThongBao("Tạo hóa đơn", "Phiếu này đã tạo hóa đơn rồi!", false);
-//            return;
-//        } else {
-//            String maPDH = ctpdhGUI.getLblMaPhieuDat().getText();
-//            LapHoaDon_GUI lapHD = new LapHoaDon_GUI(ctpdhGUI.getMainFrameQL());
-//            LapHoaDonController ctrl = new LapHoaDonController(lapHD);
-//            ctrl.loadTuPhieuDatHang(maPDH);
-//            tool.doiPanel(ctpdhGUI, lapHD);
-//        }
-//    }
+    public void taoHoaDon() {
+        if (ctpdhGUI.btnCapNhat.getText().equals("Lưu")) {
+            tool.hienThiThongBao("Tạo hóa đơn", "Vui lòng lưu phiếu trước khi tạo hóa đơn", false);
+            return;
+        } else if (ctpdhGUI.pdh.getTrangThai().equals("Đã hủy")) {
+            tool.hienThiThongBao("Tạo hóa đơn", "Không thể tạo hóa đơn với phiếu đã hủy!", false);
+            return;
+        } else if (ctpdhGUI.daChuyenHD) {
+            tool.hienThiThongBao("Tạo hóa đơn", "Phiếu này đã tạo hóa đơn rồi!", false);
+            return;
+        } else {
+            String maPDH = ctpdhGUI.getLblMaPhieuDat().getText();
+            LapHoaDon_GUI lapHD = new LapHoaDon_GUI(ctpdhGUI.getMainFrameQL());
+            LapHoaDonController ctrl = new LapHoaDonController(lapHD);
+            ctrl.loadTuPhieuDatHang(maPDH);
+            tool.doiPanel(ctpdhGUI, lapHD);
+        }
+    }
 
     public void capNhatPDH() {
         if (ctpdhGUI.daChuyenHD) {

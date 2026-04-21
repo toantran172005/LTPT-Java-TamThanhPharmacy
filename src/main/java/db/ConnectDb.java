@@ -10,7 +10,7 @@ public class ConnectDb {
 
     static {
         try {
-            factory = Persistence.createEntityManagerFactory("TamThanhPharmacy");
+            factory = Persistence.createEntityManagerFactory("TamThanhPharmacyJPA");
         } catch (Exception e) {
             e.printStackTrace();
         }
