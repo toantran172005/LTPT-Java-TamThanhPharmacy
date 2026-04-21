@@ -9,6 +9,11 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
 @Table(name = "CT_HoaDon")
 @Getter

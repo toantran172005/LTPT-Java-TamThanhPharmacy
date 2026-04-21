@@ -26,7 +26,7 @@ public interface ThuocRepository {
     String timMaQGTheoTen(String tenQG);
     String timTenQGTheoMaThuoc(String maThuoc);
     List<Thuoc> layListThuocHoanChinh();
-    List<Thuoc> layListThuoc(boolean isTrangThai);
+    List<Thuoc> layListThuoc();
     Thuoc timThuocTheoMa(String maThuoc);
     String layMaKMTheoMaThuoc(String maThuoc);
     double layDonGiaTheoMaThuoc(String maThuoc);
@@ -36,7 +36,8 @@ public interface ThuocRepository {
     Thuoc layThuocDeDat(String maThuoc);
     int laySoLuongTon(String maThuoc);
 
+    //NewInstance (21/04)
+    List<Thuoc> layListThuoc(boolean isTrangThai);
     boolean giamSoLuongTon(String maThuoc, String maDVT, int soLuongBan);
 
-    List<QuocGia> layListQG();
 }

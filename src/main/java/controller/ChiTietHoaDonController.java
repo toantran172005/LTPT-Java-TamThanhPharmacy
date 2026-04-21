@@ -51,7 +51,7 @@ public class ChiTietHoaDonController {
 
         // Gọi qua Service
         double tongTien = hdService.tinhTongTienTheoHoaDon(hd.getMaHD());
-        double tienNhan = hd.getTienNhan().toBigInteger().doubleValue();
+        double tienNhan = hd.getTienNhan();
         double tienThua = Math.max(0, tienNhan - tongTien);
 
         gui.getLblTongTien().setText(tool.dinhDangVND(tongTien));

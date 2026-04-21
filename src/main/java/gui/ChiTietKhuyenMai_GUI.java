@@ -186,7 +186,6 @@ public class ChiTietKhuyenMai_GUI extends JPanel {
     }
     
     //========== XỬ LÝ SỰ KIỆN ==============
-    
     public void ganSuKien() {
     	kmCtrl.thietLapTrangThaiSua(false);
 

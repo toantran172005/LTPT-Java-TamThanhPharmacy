@@ -1,5 +1,6 @@
 package gui;
 
+import controller.TimKiemPhieuDoiTraController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -30,13 +31,13 @@ public class TimKiemPhieuDoiTra_GUI extends JPanel {
 	public TimKiemPhieuDoiTra_GUI(TrangChuQL_GUI mainFrame) {
 		this.mainFrame = mainFrame;
 		initUI();
-//		new TimKiemPhieuDoiTraCtrl(this);
+		new TimKiemPhieuDoiTraController(this);
 	}
 
 	public TimKiemPhieuDoiTra_GUI(TrangChuNV_GUI mainFrameNV) {
 		this.mainFrameNV = mainFrameNV;
 		initUI();
-//		new TimKiemPhieuDoiTraCtrl(this);
+		new TimKiemPhieuDoiTraController(this);
 	}
 
 	public void initUI() {

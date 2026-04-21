@@ -34,10 +34,13 @@ public class HoaDonRepositoryImpl extends GenericJpa implements HoaDonRepository
     @Override
     public Map<LocalDate, Double> layDoanhThuTheoNgay(LocalDate ngayBD, LocalDate ngayKT) {
         return doInTransaction(em -> {
-            String jpql = "SELECT h.ngayLap, SUM(c.soLuong * c.donGia) " +
-                    "FROM HoaDon h JOIN CTHoaDon c " +
-                    "WHERE h.ngayLap BETWEEN :ngayBD AND :ngayKT AND h.trangThai = true " +
-                    "GROUP BY h.ngayLap ORDER BY h.ngayLap";
+            String jpql = "SELECT hd.ngayLap, SUM(c.soLuong * c.donGia) " +
+                    "FROM CTHoaDon c JOIN c.hoaDon hd " +
+                    "WHERE hd.ngayLap BETWEEN :ngayBD AND :ngayKT " +
+                    "AND hd.trangThai = true " +
+                    "GROUP BY hd.ngayLap " +
+                    "ORDER BY hd.ngayLap";
+
             List<Object[]> results = em.createQuery(jpql, Object[].class)
                     .setParameter("ngayBD", ngayBD)
                     .setParameter("ngayKT", ngayKT)
@@ -45,7 +48,9 @@ public class HoaDonRepositoryImpl extends GenericJpa implements HoaDonRepository
 
             Map<LocalDate, Double> map = new LinkedHashMap<>();
             for (Object[] row : results) {
-                map.put((LocalDate) row[0], (Double) row[1]);
+                LocalDate date = (LocalDate) row[0];
+                Double tongTien = row[1] instanceof Number ? ((Number) row[1]).doubleValue() : 0.0;
+                map.put(date, tongTien);
             }
             return map;
         });
@@ -55,8 +60,7 @@ public class HoaDonRepositoryImpl extends GenericJpa implements HoaDonRepository
     public List<KhachHang> layListKHThongKe(LocalDate ngayBD, LocalDate ngayKT) {
         return doInTransaction(em -> {
             String jpql = "SELECT DISTINCT h.khachHang FROM HoaDon h " +
-                    "WHERE h.ngayLap BETWEEN :ngayBD AND :ngayKT AND h.trangThai = true " +
-                    "ORDER BY CAST(SUBSTRING(h.khachHang.maKH, 5, LENGTH(h.khachHang.maKH)) AS Integer)";
+                    "WHERE h.ngayLap BETWEEN :ngayBD AND :ngayKT AND h.trangThai = true " ;
             return em.createQuery(jpql, KhachHang.class)
                     .setParameter("ngayBD", ngayBD)
                     .setParameter("ngayKT", ngayKT)

@@ -9,6 +9,11 @@ import org.hibernate.annotations.Nationalized;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
 @Table(name = "CT_Kho")
 @Getter

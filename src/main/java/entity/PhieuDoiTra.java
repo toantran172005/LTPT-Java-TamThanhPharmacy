@@ -9,6 +9,11 @@ import org.hibernate.annotations.Nationalized;
 
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
 @Table(name = "PhieuDoiTra")
 @Getter
