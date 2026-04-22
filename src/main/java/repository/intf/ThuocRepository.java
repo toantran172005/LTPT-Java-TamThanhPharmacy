@@ -35,6 +35,7 @@ public interface ThuocRepository {
     List<Object[]> layListTHThongKe(LocalDate ngayBD, LocalDate ngayKT);
     Thuoc layThuocDeDat(String maThuoc);
     int laySoLuongTon(String maThuoc);
+    List<QuocGia> layListQG();
 
     //NewInstance (21/04)
     List<Thuoc> layListThuoc(boolean isTrangThai);

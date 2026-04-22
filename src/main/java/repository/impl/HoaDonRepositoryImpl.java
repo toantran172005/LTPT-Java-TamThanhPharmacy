@@ -13,20 +13,46 @@ import java.util.Map;
 
 public class HoaDonRepositoryImpl extends GenericJpa implements HoaDonRepository {
 
+//    @Override
+//    public List<HoaDon> layListHoaDon() {
+//        return doInTransaction(em -> {
+//            String jpql = "SELECT h FROM HoaDon h WHERE h.trangThai = true " +
+//                    "ORDER BY CAST(SUBSTRING(h.maHD, 5, LENGTH(h.maHD)) AS Integer)";
+//            return em.createQuery(jpql, HoaDon.class).getResultList();
+//        });
+//    }
+
     @Override
     public List<HoaDon> layListHoaDon() {
         return doInTransaction(em -> {
-            String jpql = "SELECT h FROM HoaDon h WHERE h.trangThai = true " +
-                    "ORDER BY CAST(SUBSTRING(h.maHD, 5, LENGTH(h.maHD)) AS Integer)";
+            // SỬ DỤNG LEFT JOIN FETCH ĐỂ TẢI LÊN LUÔN NHÂN VIÊN VÀ KHÁCH HÀNG
+            String jpql = "SELECT h FROM HoaDon h " +
+                    "LEFT JOIN FETCH h.nhanVien " +
+                    "LEFT JOIN FETCH h.khachHang " +
+                    "WHERE h.trangThai = true";
+
             return em.createQuery(jpql, HoaDon.class).getResultList();
         });
     }
 
+//    @Override
+//    public List<HoaDon> layListHDDaXoa() {
+//        return doInTransaction(em -> {
+//            String jpql = "SELECT h FROM HoaDon h WHERE h.trangThai = false " +
+//                    "ORDER BY CAST(SUBSTRING(h.maHD, 5, LENGTH(h.maHD)) AS Integer)";
+//            return em.createQuery(jpql, HoaDon.class).getResultList();
+//        });
+//    }
+
     @Override
     public List<HoaDon> layListHDDaXoa() {
         return doInTransaction(em -> {
-            String jpql = "SELECT h FROM HoaDon h WHERE h.trangThai = false " +
-                    "ORDER BY CAST(SUBSTRING(h.maHD, 5, LENGTH(h.maHD)) AS Integer)";
+            // SỬ DỤNG LEFT JOIN FETCH TƯƠNG TỰ
+            String jpql = "SELECT h FROM HoaDon h " +
+                    "LEFT JOIN FETCH h.nhanVien " +
+                    "LEFT JOIN FETCH h.khachHang " +
+                    "WHERE h.trangThai = false";
+
             return em.createQuery(jpql, HoaDon.class).getResultList();
         });
     }
@@ -68,9 +94,25 @@ public class HoaDonRepositoryImpl extends GenericJpa implements HoaDonRepository
         });
     }
 
+//    @Override
+//    public HoaDon timHoaDonTheoMa(String maHD) {
+//        return doInTransaction(em -> em.find(HoaDon.class, maHD));
+//    }
+
     @Override
     public HoaDon timHoaDonTheoMa(String maHD) {
-        return doInTransaction(em -> em.find(HoaDon.class, maHD));
+        return doInTransaction(em -> {
+            String jpql = "SELECT h FROM HoaDon h " +
+                    "LEFT JOIN FETCH h.nhanVien " +
+                    "LEFT JOIN FETCH h.khachHang " +
+                    "WHERE h.maHD = :maHD";
+
+            return em.createQuery(jpql, HoaDon.class)
+                    .setParameter("maHD", maHD)
+                    .getResultStream() // Lấy stream để tránh lỗi nếu không tìm thấy
+                    .findFirst()
+                    .orElse(null);     // Nếu không có trả về null
+        });
     }
 
     @Override

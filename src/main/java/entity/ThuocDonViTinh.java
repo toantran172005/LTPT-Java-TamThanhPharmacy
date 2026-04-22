@@ -16,10 +16,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Thuoc_DonViTinh")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class ThuocDonViTinh {
 
     @EmbeddedId

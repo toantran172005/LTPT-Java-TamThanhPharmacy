@@ -16,10 +16,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "CT_PhieuDatHang")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class CTPhieuDatHang {
 
     @EmbeddedId
