@@ -7,6 +7,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
 import com.toedter.calendar.JDateChooser;
+import controller.KhuyenMaiController;
 import utils.ToolCtrl;
 
 import java.awt.*;
@@ -28,11 +29,11 @@ public class ThemKhuyenMai_GUI extends JPanel {
 	public JButton btnCong2;
 	public JComboBox<String> cmbThemThuoc;
 	public JButton btnThemThuoc;
-//	public KhuyenMaiCtrl kmCtrl;
+	public KhuyenMaiController kmCtrl;
 	public JButton btnXoaThuoc;
 
     public ThemKhuyenMai_GUI() {
-//    	kmCtrl = new KhuyenMaiCtrl(this);
+    	kmCtrl = new KhuyenMaiController(this);
  
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
@@ -222,13 +223,13 @@ public class ThemKhuyenMai_GUI extends JPanel {
         cmbPhuongThuc.addActionListener(e -> chonPhuongThucKM());
         chonPhuongThucKM();
 
-//        kmCtrl.setDuLieuChoCmbThuoc(cmbThemThuoc);
-//        btnThemThuoc.addActionListener(e -> kmCtrl.themThuocVaoBangThemKM());
-//        btnThem.addActionListener(e -> {
-//        	kmCtrl.themKhuyenMai();
-//        	lamMoi();
-//        });
-//        btnXoaThuoc.addActionListener(e -> kmCtrl.xoaThuocTuBang(tblThuocKhuyenMai));
+        kmCtrl.setDuLieuChoCmbThuoc(cmbThemThuoc);
+        btnThemThuoc.addActionListener(e -> kmCtrl.themThuocVaoBangThemKM());
+        btnThem.addActionListener(e -> {
+        	kmCtrl.themKhuyenMai();
+        	lamMoi();
+        });
+        btnXoaThuoc.addActionListener(e -> kmCtrl.xoaThuocTuBang(tblThuocKhuyenMai));
         
     }
 

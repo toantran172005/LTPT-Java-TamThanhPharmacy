@@ -9,12 +9,13 @@ import org.hibernate.annotations.Nationalized;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "KhuyenMai")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
+@Entity
+@Table(name = "KhuyenMai")
 public class KhuyenMai {
 
     @Id
