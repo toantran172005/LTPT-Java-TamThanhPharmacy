@@ -147,10 +147,17 @@ public class KhuyenMaiRepositoryImpl extends GenericJpa implements KhuyenMaiRepo
         try {
             inTransaction(em -> {
                 em.persist(km);
+                em.flush();
+
                 if (listChon != null && !listChon.isEmpty()) {
                     for (Object[] row : listChon) {
                         String maThuoc = (String) row[0];
-                        em.createQuery("UPDATE Thuoc t SET t.khuyenMai.maKM = :maKM WHERE t.maThuoc = :maThuoc")
+
+                        em.createQuery("""
+                        UPDATE Thuoc t 
+                        SET t.khuyenMai.maKM = :maKM 
+                        WHERE t.maThuoc = :maThuoc
+                    """)
                                 .setParameter("maKM", km.getMaKM())
                                 .setParameter("maThuoc", maThuoc)
                                 .executeUpdate();

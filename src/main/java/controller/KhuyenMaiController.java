@@ -22,6 +22,7 @@ import entity.Thuoc;
 import gui.ChiTietKhuyenMai_GUI;
 import gui.DanhSachKhuyenMai_GUI;
 import gui.ThemKhuyenMai_GUI;
+import service.ThuocService;
 import utils.ToolCtrl;
 
 public class KhuyenMaiController{
@@ -34,6 +35,7 @@ public class KhuyenMaiController{
 
     // Đã thay bằng Service
     public KhuyenMaiService kmService = new KhuyenMaiService();
+    public ThuocService thuocService = new ThuocService();
     public ToolCtrl tool = new ToolCtrl();
 
     ArrayList<KhuyenMai> listKM = new ArrayList<KhuyenMai>();
@@ -233,18 +235,18 @@ public class KhuyenMaiController{
         }
     }
 
-//    public void setDuLieuChoCmbThuoc(JComboBox<String> cmb) {
-//        cmb.removeAllItems();
-//        if (listThuocTam == null || listThuocTam.isEmpty()) {
-//            // Cần cast vì listThuocTam khai báo là ArrayList trong code của bạn
-//            listThuocTam = new ArrayList<>(thuocDao.layListThuocHoanChinh());
-//        }
-//        cmb.addItem("");
-//        for(Thuoc t : listThuocTam) {
-//            cmb.addItem(t.getTenThuoc());
-//        }
-//        caiDatGoiYThuoc(cmb);
-//    }
+    public void setDuLieuChoCmbThuoc(JComboBox<String> cmb) {
+        cmb.removeAllItems();
+        if (listThuocTam == null || listThuocTam.isEmpty()) {
+            // Cần cast vì listThuocTam khai báo là ArrayList trong code của bạn
+            listThuocTam = new ArrayList<>(thuocService.layListThuoc(true));
+        }
+        cmb.addItem("");
+        for(Thuoc t : listThuocTam) {
+            cmb.addItem(t.getTenThuoc());
+        }
+        caiDatGoiYThuoc(cmb);
+    }
 
     public void luuCapNhat() {
         if (KhuyenMaiController.maKMHienTai == null) {
@@ -321,165 +323,165 @@ public class KhuyenMaiController{
         }
     }
 
-//    public void themThuocVaoBang() {
-//        Object selectedItem = ctGUI.cmbThemThuoc.getSelectedItem();
-//        if (selectedItem == null) return;
-//        String tenThuoc = selectedItem.toString();
-//        DefaultTableModel model = (DefaultTableModel) ctGUI.tblChiTietKM.getModel();
-//
-//        for (int i = 0; i < model.getRowCount(); i++) {
-//            if (tenThuoc.equals(model.getValueAt(i, 1).toString())) {
-//                tool.hienThiThongBao("Trùng lặp", "Thuốc " + tenThuoc + " đã có trong danh sách áp dụng!", false);
-//                return;
-//            }
-//        }
-//
-//        String maThuoc = thuocDao.layMaThuocTheoTen(tenThuoc);
-//        if (maThuoc == null) {
-//            tool.hienThiThongBao("Lỗi dữ liệu", "Không tìm thấy mã thuốc tương ứng trong CSDL!", false);
-//            return;
-//        }
-//
-//        String loaiKM = ctGUI.cmbLoaiKM.getSelectedItem().toString();
-//        String hienThiMucKM = "";
-//
-//        try {
-//            if (loaiKM.equalsIgnoreCase("Giảm giá")) {
-//                String val = ctGUI.txtMucKM.getText().trim();
-//                if (val.isEmpty() || Double.parseDouble(val) <= 0 || Double.parseDouble(val) > 100) {
-//                    tool.hienThiThongBao("Lỗi nhập liệu", "Vui lòng nhập mức giảm giá hợp lệ (1-100%)!", false);
-//                    ctGUI.txtMucKM.requestFocus();
-//                    return;
-//                }
-//                hienThiMucKM = val + "%";
-//            } else {
-//                int mua = Integer.parseInt(ctGUI.txtSoLuongMua.getText().trim());
-//                int tang = Integer.parseInt(ctGUI.txtSoLuongTang.getText().trim());
-//                if (mua <= 0 || tang <= 0) {
-//                    tool.hienThiThongBao("Lỗi nhập liệu", "Số lượng mua và tặng phải lớn hơn 0!", false);
-//                    return;
-//                }
-//                hienThiMucKM = "Mua " + mua + " tặng " + tang;
-//            }
-//        } catch (NumberFormatException e) {
-//            tool.hienThiThongBao("Lỗi định dạng", "Vui lòng nhập đúng định dạng số!", false);
-//            return;
-//        }
-//
-//        model.addRow(new Object[] { maThuoc, tenThuoc, loaiKM, hienThiMucKM, "Đang áp dụng" });
-//        ctGUI.cmbThemThuoc.setSelectedItem("");
-//    }
+    public void themThuocVaoBang() {
+        Object selectedItem = ctGUI.cmbThemThuoc.getSelectedItem();
+        if (selectedItem == null) return;
+        String tenThuoc = selectedItem.toString();
+        DefaultTableModel model = (DefaultTableModel) ctGUI.tblChiTietKM.getModel();
 
-//    public void themThuocVaoBangThemKM() {
-//        Object selectedItem = themKmGUI.cmbThemThuoc.getSelectedItem();
-//        if (selectedItem == null || selectedItem.toString().trim().isEmpty()) {
-//            tool.hienThiThongBao("Cảnh báo", "Vui lòng chọn thuốc cần thêm!", false);
-//            return;
-//        }
-//        String tenThuoc = selectedItem.toString();
-//        DefaultTableModel model = (DefaultTableModel) themKmGUI.tblThuocKhuyenMai.getModel();
-//
-//        for (int i = 0; i < model.getRowCount(); i++) {
-//            Object val = model.getValueAt(i, 1);
-//            if (val != null && tenThuoc.equals(val.toString())) {
-//                tool.hienThiThongBao("Trùng lặp", "Thuốc này đã được thêm vào danh sách!", false);
-//                return;
-//            }
-//        }
-//
-//        String maThuoc = thuocDao.layMaThuocTheoTen(tenThuoc);
-//        Thuoc t = thuocDao.timThuocTheoMa(maThuoc);
-//
-//        if (t == null) {
-//            tool.hienThiThongBao("Lỗi", "Không tìm thấy thông tin thuốc!", false);
-//            return;
-//        }
-//
-//        String loaiKe = (t.getKeThuoc() != null && t.getKeThuoc().getLoaiKe() != null) ? t.getKeThuoc().getLoaiKe() : "";
-//        String tenDVT = (t.getDvt() != null && t.getDvt().getTenDVT() != null) ? t.getDvt().getTenDVT() : "";
-//
-//        model.addRow(new Object[] { t.getMaThuoc(), t.getTenThuoc(), loaiKe, tenDVT, t.getGiaBan() });
-//        themKmGUI.cmbThemThuoc.setSelectedItem("");
-//    }
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (tenThuoc.equals(model.getValueAt(i, 1).toString())) {
+                tool.hienThiThongBao("Trùng lặp", "Thuốc " + tenThuoc + " đã có trong danh sách áp dụng!", false);
+                return;
+            }
+        }
 
-//    public void themKhuyenMai() {
-//        try {
-//            String tenKM = themKmGUI.txtTenKM.getText().trim();
-//            String loaiKM = themKmGUI.cmbPhuongThuc.getSelectedItem().toString();
-//            java.util.Date dateBD = themKmGUI.dpNgayBD.getDate();
-//            java.util.Date dateKT = themKmGUI.dpNgayKT.getDate();
-//
-//            if (tenKM.isEmpty() || dateBD == null || dateKT == null) {
-//                tool.hienThiThongBao("Lỗi nhập liệu", "Vui lòng nhập đầy đủ tên và thời gian khuyến mãi!", false);
-//                return;
-//            }
-//
-//            LocalDate ngayBD = tool.utilDateSangLocalDate(dateBD);
-//            LocalDate ngayKT = tool.utilDateSangLocalDate(dateKT);
-//            if (ngayKT.isBefore(ngayBD)) {
-//                tool.hienThiThongBao("Lỗi ngày", "Ngày kết thúc phải sau ngày bắt đầu!", false);
-//                return;
-//            }
-//
-//            int mucGiam = 0, slMua = 0, slTang = 0;
-//
-//            if (loaiKM.equalsIgnoreCase("Giảm giá (%)")) {
-//                try {
-//                    mucGiam = Integer.parseInt(themKmGUI.txtMucKM.getText().trim());
-//                    if (mucGiam <= 0 || mucGiam > 100) throw new NumberFormatException();
-//                } catch (NumberFormatException e) {
-//                    tool.hienThiThongBao("Lỗi số liệu", "Mức giảm giá phải là số nguyên từ 1 đến 100!", false);
-//                    return;
-//                }
-//            } else {
-//                try {
-//                    slMua = Integer.parseInt(themKmGUI.txtSoLuongMua.getText().trim());
-//                    slTang = Integer.parseInt(themKmGUI.txtSoLuongTang.getText().trim());
-//                    if (slMua <= 0 || slTang <= 0) throw new NumberFormatException();
-//                } catch (NumberFormatException e) {
-//                    tool.hienThiThongBao("Lỗi số liệu", "Số lượng mua và tặng phải lớn hơn 0!", false);
-//                    return;
-//                }
-//            }
-//
-//            DefaultTableModel model = (DefaultTableModel) themKmGUI.tblThuocKhuyenMai.getModel();
-//            if (model.getRowCount() == 0) {
-//                int confirm = javax.swing.JOptionPane.showConfirmDialog(themKmGUI,
-//                        "Bạn chưa chọn thuốc nào. Bạn có muốn tạo khuyến mãi rỗng không?",
-//                        "Cảnh báo", javax.swing.JOptionPane.YES_NO_OPTION);
-//                if (confirm != javax.swing.JOptionPane.YES_OPTION) return;
-//            }
-//
-//            ArrayList<Object[]> listThuocChon = new ArrayList<>();
-//            for (int i = 0; i < model.getRowCount(); i++) {
-//                listThuocChon.add(new Object[] { model.getValueAt(i, 0).toString() });
-//            }
-//
-//            KhuyenMai km = new KhuyenMai();
-//            km.setMaKM(tool.taoKhoaChinh("KM"));
-//            km.setTenKM(tenKM);
-//            km.setLoaiKM(loaiKM.equalsIgnoreCase("Giảm giá (%)") ? "Giảm giá" : "Mua tặng");
-//            km.setMucKM(mucGiam);
-//            km.setSoLuongMua(slMua);
-//            km.setSoLuongTang(slTang);
-//            km.setNgayBD(ngayBD);
-//            km.setNgayKT(ngayKT);
-//            km.setTrangThai(true);
-//
-//            if (kmService.themKM(km, listThuocChon)) {
-//                tool.hienThiThongBao("Thành công", "Thêm khuyến mãi mới thành công!", true);
-//                themKmGUI.lamMoi();
-//                model.setRowCount(0);
-//                capNhatLaiTable();
-//            } else {
-//                tool.hienThiThongBao("Thất bại", "Lỗi khi lưu vào cơ sở dữ liệu!", false);
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            tool.hienThiThongBao("Lỗi hệ thống", "Đã xảy ra lỗi không mong muốn: " + e.getMessage(), false);
-//        }
-//    }
+        String maThuoc = thuocService.layMaThuocTheoTen(tenThuoc);
+        if (maThuoc == null) {
+            tool.hienThiThongBao("Lỗi dữ liệu", "Không tìm thấy mã thuốc tương ứng trong CSDL!", false);
+            return;
+        }
+
+        String loaiKM = ctGUI.cmbLoaiKM.getSelectedItem().toString();
+        String hienThiMucKM = "";
+
+        try {
+            if (loaiKM.equalsIgnoreCase("Giảm giá")) {
+                String val = ctGUI.txtMucKM.getText().trim();
+                if (val.isEmpty() || Double.parseDouble(val) <= 0 || Double.parseDouble(val) > 100) {
+                    tool.hienThiThongBao("Lỗi nhập liệu", "Vui lòng nhập mức giảm giá hợp lệ (1-100%)!", false);
+                    ctGUI.txtMucKM.requestFocus();
+                    return;
+                }
+                hienThiMucKM = val + "%";
+            } else {
+                int mua = Integer.parseInt(ctGUI.txtSoLuongMua.getText().trim());
+                int tang = Integer.parseInt(ctGUI.txtSoLuongTang.getText().trim());
+                if (mua <= 0 || tang <= 0) {
+                    tool.hienThiThongBao("Lỗi nhập liệu", "Số lượng mua và tặng phải lớn hơn 0!", false);
+                    return;
+                }
+                hienThiMucKM = "Mua " + mua + " tặng " + tang;
+            }
+        } catch (NumberFormatException e) {
+            tool.hienThiThongBao("Lỗi định dạng", "Vui lòng nhập đúng định dạng số!", false);
+            return;
+        }
+
+        model.addRow(new Object[] { maThuoc, tenThuoc, loaiKM, hienThiMucKM, "Đang áp dụng" });
+        ctGUI.cmbThemThuoc.setSelectedItem("");
+    }
+
+    public void themThuocVaoBangThemKM() {
+        Object selectedItem = themKmGUI.cmbThemThuoc.getSelectedItem();
+        if (selectedItem == null || selectedItem.toString().trim().isEmpty()) {
+            tool.hienThiThongBao("Cảnh báo", "Vui lòng chọn thuốc cần thêm!", false);
+            return;
+        }
+        String tenThuoc = selectedItem.toString();
+        DefaultTableModel model = (DefaultTableModel) themKmGUI.tblThuocKhuyenMai.getModel();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Object val = model.getValueAt(i, 1);
+            if (val != null && tenThuoc.equals(val.toString())) {
+                tool.hienThiThongBao("Trùng lặp", "Thuốc này đã được thêm vào danh sách!", false);
+                return;
+            }
+        }
+
+        String maThuoc = thuocService.layMaThuocTheoTen(tenThuoc);
+        Thuoc t = thuocService.timThuocTheoMa(maThuoc);
+
+        if (t == null) {
+            tool.hienThiThongBao("Lỗi", "Không tìm thấy thông tin thuốc!", false);
+            return;
+        }
+
+        String loaiKe = (t.getKeThuoc() != null && t.getKeThuoc().getLoaiKe() != null) ? t.getKeThuoc().getLoaiKe() : "";
+        String tenDVT = (t.getDonViTinh() != null && t.getDonViTinh().getTenDVT() != null) ? t.getDonViTinh().getTenDVT() : "";
+
+        model.addRow(new Object[] { t.getMaThuoc(), t.getTenThuoc(), loaiKe, tenDVT, t.getGiaBan() });
+        themKmGUI.cmbThemThuoc.setSelectedItem("");
+    }
+
+    public void themKhuyenMai() {
+        try {
+            String tenKM = themKmGUI.txtTenKM.getText().trim();
+            String loaiKM = themKmGUI.cmbPhuongThuc.getSelectedItem().toString();
+            java.util.Date dateBD = themKmGUI.dpNgayBD.getDate();
+            java.util.Date dateKT = themKmGUI.dpNgayKT.getDate();
+
+            if (tenKM.isEmpty() || dateBD == null || dateKT == null) {
+                tool.hienThiThongBao("Lỗi nhập liệu", "Vui lòng nhập đầy đủ tên và thời gian khuyến mãi!", false);
+                return;
+            }
+
+            LocalDate ngayBD = tool.utilDateSangLocalDate(dateBD);
+            LocalDate ngayKT = tool.utilDateSangLocalDate(dateKT);
+            if (ngayKT.isBefore(ngayBD)) {
+                tool.hienThiThongBao("Lỗi ngày", "Ngày kết thúc phải sau ngày bắt đầu!", false);
+                return;
+            }
+
+            int mucGiam = 0, slMua = 0, slTang = 0;
+
+            if (loaiKM.equalsIgnoreCase("Giảm giá (%)")) {
+                try {
+                    mucGiam = Integer.parseInt(themKmGUI.txtMucKM.getText().trim());
+                    if (mucGiam <= 0 || mucGiam > 100) throw new NumberFormatException();
+                } catch (NumberFormatException e) {
+                    tool.hienThiThongBao("Lỗi số liệu", "Mức giảm giá phải là số nguyên từ 1 đến 100!", false);
+                    return;
+                }
+            } else {
+                try {
+                    slMua = Integer.parseInt(themKmGUI.txtSoLuongMua.getText().trim());
+                    slTang = Integer.parseInt(themKmGUI.txtSoLuongTang.getText().trim());
+                    if (slMua <= 0 || slTang <= 0) throw new NumberFormatException();
+                } catch (NumberFormatException e) {
+                    tool.hienThiThongBao("Lỗi số liệu", "Số lượng mua và tặng phải lớn hơn 0!", false);
+                    return;
+                }
+            }
+
+            DefaultTableModel model = (DefaultTableModel) themKmGUI.tblThuocKhuyenMai.getModel();
+            if (model.getRowCount() == 0) {
+                int confirm = javax.swing.JOptionPane.showConfirmDialog(themKmGUI,
+                        "Bạn chưa chọn thuốc nào. Bạn có muốn tạo khuyến mãi rỗng không?",
+                        "Cảnh báo", javax.swing.JOptionPane.YES_NO_OPTION);
+                if (confirm != javax.swing.JOptionPane.YES_OPTION) return;
+            }
+
+            ArrayList<Object[]> listThuocChon = new ArrayList<>();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                listThuocChon.add(new Object[] { model.getValueAt(i, 0).toString() });
+            }
+
+            KhuyenMai km = new KhuyenMai();
+            km.setMaKM(tool.taoKhoaChinh("KM"));
+            km.setTenKM(tenKM);
+            km.setLoaiKM(loaiKM.equalsIgnoreCase("Giảm giá (%)") ? "Giảm giá" : "Mua tặng");
+            km.setMucKM(mucGiam);
+            km.setSoLuongMua(slMua);
+            km.setSoLuongTang(slTang);
+            km.setNgayBD(ngayBD);
+            km.setNgayKT(ngayKT);
+            km.setTrangThai(true);
+
+            if (kmService.themKM(km, listThuocChon)) {
+                tool.hienThiThongBao("Thành công", "Thêm khuyến mãi mới thành công!", true);
+                themKmGUI.lamMoi();
+                model.setRowCount(0);
+                capNhatLaiTable();
+            } else {
+                tool.hienThiThongBao("Thất bại", "Lỗi khi lưu vào cơ sở dữ liệu!", false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            tool.hienThiThongBao("Lỗi hệ thống", "Đã xảy ra lỗi không mong muốn: " + e.getMessage(), false);
+        }
+    }
 
     public void xoaThuocTuBang(JTable table) {
         int selectedRow = table.getSelectedRow();
@@ -503,51 +505,51 @@ public class KhuyenMaiController{
         }
     }
 
-//    public void caiDatGoiYThuoc(JComboBox<String> cmb) {
-//        cmb.setEditable(true);
-//        final JTextField textfield = (JTextField) cmb.getEditor().getEditorComponent();
-//
-//        textfield.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyReleased(KeyEvent e) {
-//                if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN ||
-//                        e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_LEFT ||
-//                        e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//                    return;
-//                }
-//
-//                SwingUtilities.invokeLater(() -> {
-//                    String text = textfield.getText();
-//                    int caretPos = textfield.getCaretPosition();
-//                    ArrayList<String> ketQuaLoc = new ArrayList<>();
-//
-//                    if (listThuocTam == null) listThuocTam = new ArrayList<>(thuocDao.layListThuocHoanChinh());
-//
-//                    for (Thuoc t : listThuocTam) {
-//                        if (t.getTenThuoc().toLowerCase().contains(text.toLowerCase())) {
-//                            ketQuaLoc.add(t.getTenThuoc());
-//                        }
-//                    }
-//
-//                    DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cmb.getModel();
-//                    model.removeAllElements();
-//
-//                    for (String s : ketQuaLoc) {
-//                        model.addElement(s);
-//                    }
-//
-//                    textfield.setText(text);
-//                    try {
-//                        textfield.setCaretPosition(caretPos);
-//                    } catch (Exception ex) {}
-//
-//                    if (!ketQuaLoc.isEmpty() && !text.isEmpty()) {
-//                        cmb.showPopup();
-//                    } else if (text.isEmpty()) {
-//                        cmb.hidePopup();
-//                    }
-//                });
-//            }
-//        });
-//    }
+    public void caiDatGoiYThuoc(JComboBox<String> cmb) {
+        cmb.setEditable(true);
+        final JTextField textfield = (JTextField) cmb.getEditor().getEditorComponent();
+
+        textfield.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN ||
+                        e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_LEFT ||
+                        e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    return;
+                }
+
+                SwingUtilities.invokeLater(() -> {
+                    String text = textfield.getText();
+                    int caretPos = textfield.getCaretPosition();
+                    ArrayList<String> ketQuaLoc = new ArrayList<>();
+
+                    if (listThuocTam == null) listThuocTam = new ArrayList<>(thuocService.layListThuocHoanChinh());
+
+                    for (Thuoc t : listThuocTam) {
+                        if (t.getTenThuoc().toLowerCase().contains(text.toLowerCase())) {
+                            ketQuaLoc.add(t.getTenThuoc());
+                        }
+                    }
+
+                    DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cmb.getModel();
+                    model.removeAllElements();
+
+                    for (String s : ketQuaLoc) {
+                        model.addElement(s);
+                    }
+
+                    textfield.setText(text);
+                    try {
+                        textfield.setCaretPosition(caretPos);
+                    } catch (Exception ex) {}
+
+                    if (!ketQuaLoc.isEmpty() && !text.isEmpty()) {
+                        cmb.showPopup();
+                    } else if (text.isEmpty()) {
+                        cmb.hidePopup();
+                    }
+                });
+            }
+        });
+    }
 }

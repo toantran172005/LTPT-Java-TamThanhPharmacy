@@ -1,5 +1,6 @@
 package gui;
 
+import controller.NhapThuocController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -16,13 +17,13 @@ import java.awt.*;
 public class NhapThuoc_GUI extends JPanel {
 
 	public ToolCtrl tool = new ToolCtrl();
-//	public NhapThuocCtrl ntCtrl;
+	public NhapThuocController ntCtrl;
 	public JTable tblNhapThuoc;
 	public JButton btnLamMoi, btnThemTep, btnLuu;
 	public DefaultTableModel model;
 
 	public NhapThuoc_GUI() {
-//		ntCtrl = new NhapThuocCtrl(this);
+		ntCtrl = new NhapThuocController(this);
 		setLayout(new BorderLayout());
 		setBackground(Color.WHITE);
 		setBorder(new EmptyBorder(10, 20, 10, 20));
@@ -68,7 +69,7 @@ public class NhapThuoc_GUI extends JPanel {
 
         // =================== CENTER (Table) ===================
         String[] columnNames = {
-            "STT", "Mã thuốc", "Tên thuốc", "Số lô", "Dạng thuốc",
+            "STT", "Mã thuốc", "Tên thuốc", "Dạng thuốc",
             "ĐVT", "Nơi sản xuất", "Hạn dùng", "Số lượng", "Đơn giá", "Thuế (%)", "Loại thuế", "Thành tiền"
         };
 
@@ -116,9 +117,9 @@ public class NhapThuoc_GUI extends JPanel {
 		add(bottomPanel, BorderLayout.SOUTH);
 
 //		// =================== SỰ KIỆN ===================
-//		btnLamMoi.addActionListener(e -> lamMoiBang());
-//		btnThemTep.addActionListener(e -> ntCtrl.chonFileExcel());
-//		btnLuu.addActionListener(e -> ntCtrl.luuDataTuTable());
+		btnLamMoi.addActionListener(e -> lamMoiBang());
+		btnThemTep.addActionListener(e -> ntCtrl.chonFileExcel());
+		btnLuu.addActionListener(e -> ntCtrl.luuDataTuTable());
 	}
 
 	// =================== HÀM XỬ LÝ ===================

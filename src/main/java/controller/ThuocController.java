@@ -66,7 +66,7 @@ public class ThuocController {
 
     public void lamMoiDuLieu() {
         // Nâng cấp: Dùng Service và ép kiểu ArrayList
-        listThuoc = new ArrayList<>(thuocService.layListThuocHoanChinh());
+        listThuoc = new ArrayList<>(thuocService.layListThuoc(true));
     }
 
     public File chonFile() {

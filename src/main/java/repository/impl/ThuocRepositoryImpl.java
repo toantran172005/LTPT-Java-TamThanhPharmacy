@@ -159,7 +159,40 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
     @Override
     public boolean themThuoc(Thuoc thuoc) {
         try {
-            inTransaction(em -> em.persist(thuoc));
+            inTransaction(em -> {
+
+                if (thuoc.getKeThuoc() != null) {
+                    thuoc.setKeThuoc(em.find(
+                            thuoc.getKeThuoc().getClass(),
+                            thuoc.getKeThuoc().getMaKe()
+                    ));
+                }
+
+                if (thuoc.getDonViTinh() != null) {
+                    thuoc.setDonViTinh(em.find(
+                            thuoc.getDonViTinh().getClass(),
+                            thuoc.getDonViTinh().getMaDVT()
+                    ));
+                }
+
+                if (thuoc.getQuocGia() != null) {
+                    thuoc.setQuocGia(em.find(
+                            thuoc.getQuocGia().getClass(),
+                            thuoc.getQuocGia().getMaQuocGia()
+                    ));
+                }
+
+                if (thuoc.getKhuyenMai() != null) {
+                    thuoc.setKhuyenMai(em.find(
+                            thuoc.getKhuyenMai().getClass(),
+                            thuoc.getKhuyenMai().getMaKM()
+                    ));
+                }
+
+                em.persist(thuoc);
+                em.flush();
+            });
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,15 +202,11 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
 
     @Override
     public boolean luuData(String maPNT, String maNCC, String maNV, LocalDate ngayNhap, List<Thuoc> listThuoc) {
-        // Tối ưu hóa: Gọi save Phiếu Nhập và persist danh sách thuốc trong 1 transaction lambda.
         try {
             inTransaction(em -> {
-                // Giả định Entity PhieuNhapThuoc, CT_PhieuNhapThuoc đã được map chính xác
-                // Lấy ra và xử lý batch insert cho listThuoc
                 for(Thuoc t : listThuoc) {
                     em.persist(t);
                 }
-                // (Logic lưu phiếu nhập tương ứng Entity)
             });
             return true;
         } catch (Exception e) {
@@ -238,7 +267,16 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
 
     @Override
     public Thuoc timThuocTheoMa(String maThuoc) {
-        return doInTransaction(em -> em.find(Thuoc.class, maThuoc));
+        return doInTransaction(em -> {
+            String jpql = "SELECT t FROM Thuoc t " +
+                    "LEFT JOIN FETCH t.keThuoc " +
+                    "LEFT JOIN FETCH t.donViTinh " +
+                    "WHERE t.maThuoc = :maThuoc";
+
+            return em.createQuery(jpql, Thuoc.class)
+                    .setParameter("maThuoc", maThuoc)
+                    .getSingleResult();
+        });
     }
 
     @Override
@@ -292,7 +330,6 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
     @Override
     public List<Object[]> layListTHThongKe(LocalDate ngayBD, LocalDate ngayKT) {
         return doInTransaction(em -> {
-            // Thay vì dùng CASE WHEN phức tạp của SQL Server, ta xử lý JPQL theo chuẩn JPA
             String jpql = "SELECT t.maThuoc, t.tenThuoc, SUM(c.soLuong), SUM(c.soLuong * c.donGia) " +
                     "FROM CTHoaDon c JOIN c.hoaDon hd JOIN c.thuoc t " +
                     "WHERE hd.trangThai = true AND hd.ngayLap BETWEEN :ngayBD AND :ngayKT " +
@@ -301,7 +338,7 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
             TypedQuery<Object[]> query = em.createQuery(jpql, Object[].class);
             query.setParameter("ngayBD", ngayBD);
             query.setParameter("ngayKT", ngayKT);
-            query.setMaxResults(10); // Tương đương TOP 10 trong SQL
+            query.setMaxResults(10);
 
             return query.getResultList();
         });
@@ -316,14 +353,12 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
     public int laySoLuongTon(String maThuoc) {
         return doInTransaction(em -> {
             try {
-                // Sử dụng Number.class thay vì Integer.class để tránh lỗi Mismatch
                 String jpql = "SELECT c.soLuongTon FROM CTKho c WHERE c.thuoc.maThuoc = :maThuoc";
 
                 Number result = em.createQuery(jpql, Number.class)
                         .setParameter("maThuoc", maThuoc)
                         .getSingleResult();
 
-                // Trả về giá trị int, nếu null thì mặc định là 0
                 return (result != null) ? result.intValue() : 0;
             } catch (NoResultException e) {
                 return 0;
@@ -380,7 +415,7 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
                 if (tonMoi < 0) {
                     throw new RuntimeException("Tồn kho không đủ");
                 }
-                ctKho.setSoLuongTon((double) tonMoi);
+                ctKho.setSoLuongTon((int) tonMoi);
                 em.merge(ctKho);
             });
 
