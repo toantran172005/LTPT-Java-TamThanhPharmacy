@@ -1,7 +1,6 @@
 package repository.impl;
 
 import entity.DonViTinh;
-import jakarta.persistence.NoResultException;
 import repository.GenericJpa;
 import repository.intf.DonViTinhRepository;
 
@@ -12,8 +11,7 @@ public class DonViTinhRepositoryImpl extends GenericJpa implements DonViTinhRepo
     @Override
     public List<DonViTinh> layDanhSachTheoTrangThai(boolean trangThai) {
         return doInTransaction(em -> {
-            // Trong JPQL, ta có thể dùng substring để cắt chuỗi thay cho REPLACE trong SQL Server
-            String jpql = "SELECT d FROM DonViTinh d WHERE d.trangThai = :trangThai ORDER BY d.maDVT";
+            String jpql = "SELECT d FROM DonViTinh d WHERE d.trangThai = :trangThai";
             return em.createQuery(jpql, DonViTinh.class)
                     .setParameter("trangThai", trangThai)
                     .getResultList();
@@ -23,15 +21,11 @@ public class DonViTinhRepositoryImpl extends GenericJpa implements DonViTinhRepo
     @Override
     public DonViTinh timTheoTen(String tenDVT) {
         return doInTransaction(em -> {
-            try {
-                String jpql = "SELECT d FROM DonViTinh d WHERE d.tenDVT = :ten";
-                return em.createQuery(jpql, DonViTinh.class)
-                        .setParameter("ten", tenDVT)
-                        .setMaxResults(1)
-                        .getSingleResult();
-            } catch (NoResultException e) {
-                return null;
-            }
+            String jpql = "SELECT d FROM DonViTinh d WHERE d.tenDVT = :tenDVT";
+            List<DonViTinh> result = em.createQuery(jpql, DonViTinh.class)
+                    .setParameter("tenDVT", tenDVT)
+                    .getResultList();
+            return result.isEmpty() ? null : result.get(0);
         });
     }
 
@@ -55,10 +49,10 @@ public class DonViTinhRepositoryImpl extends GenericJpa implements DonViTinhRepo
     public boolean capNhatTrangThai(String maDVT, boolean trangThai) {
         try {
             inTransaction(em -> {
-                DonViTinh d = em.find(DonViTinh.class, maDVT);
-                if (d != null) {
-                    d.setTrangThai(trangThai);
-                    em.merge(d);
+                DonViTinh dvt = em.find(DonViTinh.class, maDVT);
+                if (dvt != null) {
+                    dvt.setTrangThai(trangThai);
+                    em.merge(dvt);
                 }
             });
             return true;
@@ -66,5 +60,14 @@ public class DonViTinhRepositoryImpl extends GenericJpa implements DonViTinhRepo
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<DonViTinh> layListDVT() {
+        return doInTransaction(em -> {
+            // Chỉ dùng JPQL thuần túy, sạch sẽ để lấy các đơn vị đang hoạt động (true)
+            String jpql = "SELECT d FROM DonViTinh d WHERE d.trangThai = true";
+            return em.createQuery(jpql, DonViTinh.class).getResultList();
+        });
     }
 }

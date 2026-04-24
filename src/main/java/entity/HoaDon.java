@@ -42,8 +42,8 @@ public class HoaDon {
     @Column(name = "diaChiHT", length = 255)
     private String diaChiHT;
 
-    @Column(name = "tienNhan", precision = 18, scale = 2)
-    private BigDecimal tienNhan;
+    @Column(name = "tienNhan", precision = 18)
+    private Double tienNhan;
 
     @Column(name = "trangThai", nullable = false)
     private Boolean trangThai = true;
@@ -56,6 +56,17 @@ public class HoaDon {
     @JoinColumn(name = "maNV", nullable = false)
     private NhanVien nhanVien;
 
-    public HoaDon(String maHD, KhachHang khHD, NhanVien nv, String hinhThucTT, LocalDate now, String diaChiHT, String tenHT, String string, String hotline, double tienNhan, boolean b) {
+    public HoaDon(String maHD, KhachHang khHD, NhanVien nv, String hinhThucTT, LocalDate now, String diaChiHT, String tenHT, String ghiChu, String hotline, double tienNhan, boolean trangThai) {
+        this.maHD = maHD;
+        this.khachHang = khHD;
+        this.nhanVien = nv;
+        this.loaiTT = hinhThucTT;
+        this.ngayLap = now;
+        this.tenHT = tenHT;
+        this.diaChiHT = diaChiHT;
+        this.ghiChu = ghiChu;
+        this.hotline = hotline;
+        this.tienNhan = tienNhan;
+        this.trangThai = trangThai;
     }
 }

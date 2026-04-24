@@ -8,13 +8,16 @@ import lombok.Setter;
 import org.hibernate.annotations.Nationalized;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "PhieuDoiTra")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class PhieuDoiTra {
 
     @Id
@@ -35,4 +38,7 @@ public class PhieuDoiTra {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "maNV", nullable = false)
     private NhanVien nhanVien;
+
+    @OneToMany(mappedBy = "phieuDoiTra", cascade = CascadeType.ALL)
+    private List<CTPhieuDoiTra> danhSachChiTiet = new ArrayList<>();
 }

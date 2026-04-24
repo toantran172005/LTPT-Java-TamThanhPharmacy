@@ -1,5 +1,6 @@
 package gui;
 
+import controller.ChiTietPhieuDoiTraController;
 import utils.ToolCtrl;
 
 import javax.swing.*;
@@ -24,22 +25,22 @@ public class ChiTietPhieuDoiTra_GUI extends JPanel {
 	Font font1 = new Font("Times New Roman", Font.BOLD, 18);
 	Font font2 = new Font("Times New Roman", Font.PLAIN, 15);
 	public ToolCtrl tool = new ToolCtrl();
-//	public ChiTietPhieuDoiTraCtrl ctrl;
+	public ChiTietPhieuDoiTraController ctrl;
 
-//	public ChiTietPhieuDoiTraCtrl getCtrl() {
-//		return ctrl;
-//	}
+	public ChiTietPhieuDoiTraController getCtrl() {
+		return ctrl;
+	}
 
 	public ChiTietPhieuDoiTra_GUI(TrangChuQL_GUI mainFrame) {
 		this.mainFrameQL = mainFrame;
 		initUI();
-//		this.ctrl = new ChiTietPhieuDoiTraCtrl(this);
+		this.ctrl = new ChiTietPhieuDoiTraController(this);
 	}
 
 	public ChiTietPhieuDoiTra_GUI(TrangChuNV_GUI mainFrame) {
 		this.mainFrameNV = mainFrame;
 		initUI();
-//		this.ctrl = new ChiTietPhieuDoiTraCtrl(this);
+		this.ctrl = new ChiTietPhieuDoiTraController(this);
 	}
 
 	public void initUI() {

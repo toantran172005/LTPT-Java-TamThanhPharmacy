@@ -557,66 +557,66 @@ public class LapHoaDonController {
         }
     }
 
-//    public void loadTuPhieuDatHang(String maPDH) {
-//        lapTuPhieuDatHang = true;
-//
-//        PhieuDatHang pdh = pdhService.timTheoMa(maPDH);
-//        if (pdh == null) {
-//            tool.hienThiThongBao("Lỗi", "Không tìm thấy phiếu đặt hàng!", false);
-//            return;
-//        }
-//
-//        KhachHang kh = pdh.getKhachHang();
-//        gui.getTxtTenKH().setText(kh.getTenKH());
-//        gui.getTxtSdt().setText(tool.chuyenSoDienThoai(kh.getSdt()));
-//        gui.getTxtTuoi().setText(String.valueOf(kh.getTuoi()));
-//        gui.getTxtTuoi().setEditable(false);
-//
-//        DefaultTableModel model = (DefaultTableModel) gui.getTblThuoc().getModel();
-//        model.setRowCount(0);
-//
-//        List<Object[]> chiTiet = new ArrayList<>(pdhService.layDanhSachThuocTheoPDH(maPDH));
-//
-//        for (Object[] ct : chiTiet) {
-//            String maThuoc = ct[1].toString();
-//            int sl = Integer.parseInt(ct[3].toString());
-//            String tenQG = thuocService.timTenQGTheoMaThuoc(maThuoc);
-//            String tenDVT = ct[5].toString();
-//            double donGia = Double.parseDouble(ct[6].toString());
-//            double thanhTien = Double.parseDouble(ct[7].toString());
-//
-//            double donGiaGoc = donGia;
-//            double donGiaSauKM = donGiaGoc;
-//            double mucGiam;
-//            String moTaKM = "Không có KM";
-//            String maKM = thuocService.layMaKMTheoMaThuoc(maThuoc);
-//            LocalDate homNay = LocalDate.now();
-//
-//            if (maKM != null && !maKM.isEmpty()) {
-//                KhuyenMai km = kmService.layKhuyenMaiTheoMa(maKM);
-//                if (km != null && !homNay.isBefore(km.getNgayBD()) && !homNay.isAfter(km.getNgayKT())) {
-//                    switch (km.getLoaiKM().toLowerCase()) {
-//                        case "giảm giá":
-//                            mucGiam = (double) km.getMucKM();
-//                            donGiaSauKM = donGiaGoc * (1 - mucGiam / 100.0);
-//                            moTaKM = "Giảm " + mucGiam + "%";
-//                            break;
-//                        case "mua tặng":
-//                            int soLuongTang = (sl / km.getSoLuongMua()) * km.getSoLuongTang();
-//                            if (soLuongTang > 0) {
-//                                moTaKM = String.format("Mua %d tặng %d (Tặng: %d)", km.getSoLuongMua(), km.getSoLuongTang(), soLuongTang);
-//                            }
-//                            donGiaSauKM = donGiaGoc;
-//                            break;
-//                    }
-//                }
-//            }
-//
-//            model.addRow(new Object[] { model.getRowCount() + 1, ct[2], tenQG, sl, tenDVT, tool.dinhDangVND(donGia),
-//                    tool.dinhDangVND(donGiaSauKM), tool.dinhDangVND(thanhTien), moTaKM, "Xóa" });
-//        }
-//        tinhTongTien();
-//    }
+    public void loadTuPhieuDatHang(String maPDH) {
+        lapTuPhieuDatHang = true;
+
+        PhieuDatHang pdh = pdhService.timTheoMa(maPDH);
+        if (pdh == null) {
+            tool.hienThiThongBao("Lỗi", "Không tìm thấy phiếu đặt hàng!", false);
+            return;
+        }
+
+        KhachHang kh = pdh.getKhachHang();
+        gui.getTxtTenKH().setText(kh.getTenKH());
+        gui.getTxtSdt().setText(tool.chuyenSoDienThoai(kh.getSdt()));
+        gui.getTxtTuoi().setText(String.valueOf(kh.getTuoi()));
+        gui.getTxtTuoi().setEditable(false);
+
+        DefaultTableModel model = (DefaultTableModel) gui.getTblThuoc().getModel();
+        model.setRowCount(0);
+
+        List<Object[]> chiTiet = new ArrayList<>(pdhService.layDanhSachThuocTheoPDH(maPDH));
+
+        for (Object[] ct : chiTiet) {
+            String maThuoc = ct[1].toString();
+            int sl = Integer.parseInt(ct[3].toString());
+            String tenQG = thuocService.timTenQGTheoMaThuoc(maThuoc);
+            String tenDVT = ct[5].toString();
+            double donGia = Double.parseDouble(ct[6].toString());
+            double thanhTien = Double.parseDouble(ct[7].toString());
+
+            double donGiaGoc = donGia;
+            double donGiaSauKM = donGiaGoc;
+            double mucGiam;
+            String moTaKM = "Không có KM";
+            String maKM = thuocService.layMaKMTheoMaThuoc(maThuoc);
+            LocalDate homNay = LocalDate.now();
+
+            if (maKM != null && !maKM.isEmpty()) {
+                KhuyenMai km = kmService.layKhuyenMaiTheoMa(maKM);
+                if (km != null && !homNay.isBefore(km.getNgayBD()) && !homNay.isAfter(km.getNgayKT())) {
+                    switch (km.getLoaiKM().toLowerCase()) {
+                        case "giảm giá":
+                            mucGiam = (double) km.getMucKM();
+                            donGiaSauKM = donGiaGoc * (1 - mucGiam / 100.0);
+                            moTaKM = "Giảm " + mucGiam + "%";
+                            break;
+                        case "mua tặng":
+                            int soLuongTang = (sl / km.getSoLuongMua()) * km.getSoLuongTang();
+                            if (soLuongTang > 0) {
+                                moTaKM = String.format("Mua %d tặng %d (Tặng: %d)", km.getSoLuongMua(), km.getSoLuongTang(), soLuongTang);
+                            }
+                            donGiaSauKM = donGiaGoc;
+                            break;
+                    }
+                }
+            }
+
+            model.addRow(new Object[] { model.getRowCount() + 1, ct[2], tenQG, sl, tenDVT, tool.dinhDangVND(donGia),
+                    tool.dinhDangVND(donGiaSauKM), tool.dinhDangVND(thanhTien), moTaKM, "Xóa" });
+        }
+        tinhTongTien();
+    }
 
     public void goiYThuoc() {
         JTextField txtTimThuoc = (JTextField) gui.getCmbSanPham().getEditor().getEditorComponent();

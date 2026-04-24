@@ -9,12 +9,13 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "Thuoc_DonViTinh")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+
+@Entity
+@Table(name = "Thuoc_DonViTinh")
 public class ThuocDonViTinh {
 
     @EmbeddedId

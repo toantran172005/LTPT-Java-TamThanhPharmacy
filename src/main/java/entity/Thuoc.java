@@ -29,6 +29,9 @@ public class Thuoc {
     @Column(name = "dangThuoc", length = 50, nullable = false)
     private String dangThuoc;
 
+    @Column(name = "soLuong", nullable = false)
+    private int soLuong;
+
     @Column(name = "giaBan", nullable = false)
     private Double giaBan;
 

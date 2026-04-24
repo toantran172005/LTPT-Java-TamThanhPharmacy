@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Nationalized;
 
-@Entity
-@Table(name = "DonViTinh")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+
+@Entity
+@Table(name = "DonViTinh")
 public class DonViTinh {
 
     @Id

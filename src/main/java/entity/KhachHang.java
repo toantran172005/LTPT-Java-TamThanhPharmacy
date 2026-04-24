@@ -36,8 +36,11 @@ public class KhachHang {
     @OneToMany(mappedBy = "khachHang", cascade = CascadeType.ALL)
     private List<HoaDon> danhSachHoaDon;
 
-    public KhachHang(String maKH, String tenKH, String sdt, int tuoi, boolean b) {
+    public KhachHang(String maKH, String tenKH, String sdt, Integer tuoi, Boolean trangThai) {
+        this.maKH = maKH;
+        this.tenKH = tenKH;
+        this.sdt = sdt;
+        this.tuoi = tuoi;
+        this.trangThai = trangThai;
     }
-
-
 }

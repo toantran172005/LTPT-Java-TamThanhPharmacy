@@ -9,12 +9,13 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "CT_PhieuDatHang")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+
+@Entity
+@Table(name = "CT_PhieuDatHang")
 public class CTPhieuDatHang {
 
     @EmbeddedId

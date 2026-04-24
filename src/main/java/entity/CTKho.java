@@ -9,12 +9,13 @@ import org.hibernate.annotations.Nationalized;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "CT_Kho")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+
+@Entity
+@Table(name = "CT_Kho")
 public class CTKho {
 
     @EmbeddedId
