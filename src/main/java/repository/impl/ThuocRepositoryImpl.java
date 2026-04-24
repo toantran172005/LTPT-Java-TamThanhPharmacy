@@ -380,8 +380,7 @@ public class ThuocRepositoryImpl extends GenericJpa implements ThuocRepository {
                 if (tonMoi < 0) {
                     throw new RuntimeException("Tồn kho không đủ");
                 }
-
-                ctKho.setSoLuongTon((int) tonMoi);
+                ctKho.setSoLuongTon((double) tonMoi);
                 em.merge(ctKho);
             });
 

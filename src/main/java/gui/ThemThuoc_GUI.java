@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 
 import com.toedter.calendar.JDateChooser;
+import controller.ThemThuocController;
 import utils.ToolCtrl;
 
 import java.awt.*;
@@ -24,13 +25,13 @@ public class ThemThuoc_GUI extends JPanel {
 	public JButton btnChonAnh, btnLamMoi, btnThem;
 	public String urlAnh = null;
 
-//	public ThemThuocCtrl thCtrl;
+	public ThemThuocController thCtrl;
 	public ToolCtrl tool = new ToolCtrl();
 	public JComboBox cmbQuocGia;
 	public JSpinner spSoLuongTon;
 
 	public ThemThuoc_GUI() {
-//		this.thCtrl = new ThemThuocCtrl(this);
+		this.thCtrl = new ThemThuocController(this);
 		setLayout(new BorderLayout());
 		setBackground(Color.WHITE);
 
@@ -138,12 +139,12 @@ public class ThemThuoc_GUI extends JPanel {
 	// Gắn sự kiện
 	public void ganSuKien() {
 		btnLamMoi.addActionListener(e -> onBtnLamMoi());
-//		btnThem.addActionListener(e -> thCtrl.themThuoc());
+		btnThem.addActionListener(e -> thCtrl.themThuoc());
 		btnChonAnh.addActionListener(e -> onBtnChonAnh());
-//		thCtrl.setCmbKeThuoc();
-//		thCtrl.setCmbDonVi();
-//		thCtrl.setCmbQuocGia();
-//		thCtrl.setCmbThue();
+		thCtrl.setCmbKeThuoc();
+		thCtrl.setCmbDonVi();
+		thCtrl.setCmbQuocGia();
+		thCtrl.setCmbThue();
 	}
 
 	// ====== Hàm tạo 1 dòng nhãn + ô nhập ======

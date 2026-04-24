@@ -6,6 +6,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
+import controller.ThemThuocController;
+import controller.ThuocController;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -32,11 +34,11 @@ public class ThongKeThuoc_GUI extends JPanel {
 	public ChartPanel pnlChart;
 	public JFreeChart chart;
 	public final ToolCtrl tool = new ToolCtrl();
-//	public ThuocCtrl thCtrl;
+	public ThuocController thCtrl;
 	public ArrayList<Thuoc> list = new ArrayList<Thuoc>();
 
     public ThongKeThuoc_GUI() {
-//    	thCtrl = new ThuocCtrl(this);
+    	thCtrl = new ThuocController(this);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
@@ -126,19 +128,19 @@ public class ThongKeThuoc_GUI extends JPanel {
         add(pnlChart, BorderLayout.SOUTH);
 
         // ===== EVENTS =====
-//        ganSuKien();
+        ganSuKien();
     }
 
     
     // =================== Xử lý ===================
-//    public void ganSuKien() {
-//    	btnThongKe.addActionListener(e -> {
-//    		thCtrl.onThongKe();
-//    	});
-//
-//    	btnLamMoi.addActionListener(e -> thCtrl.onLamMoi());
-//    	btnLuu.addActionListener(e -> thCtrl.xuatFileExcel());
-//    }
+    public void ganSuKien() {
+    	btnThongKe.addActionListener(e -> {
+    		thCtrl.onThongKe();
+    	});
+
+    	btnLamMoi.addActionListener(e -> thCtrl.onLamMoi());
+    	btnLuu.addActionListener(e -> thCtrl.xuatFileExcel());
+    }
     
 
 }
